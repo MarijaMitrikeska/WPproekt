@@ -1,0 +1,51 @@
+<!--HEADER-->
+<header xmlns:th="http://www.thymeleaf.org">
+    <nav class="navbar navbar-dark bg-dark" style="color: #1c2e4a">
+        <div class="container">
+            <a class="navbar-brand" href="/home" style="font-family: Poppins-Bold,serif; font-size: 25px">EMANAGE</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <form class="form-inline my-2 my-lg-0 entitySearch">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small"
+                           aria-describedby="inputGroup-sizing-sm"
+                           placeholder="Search ads..." name="attrName" id="attrName">
+                    <div class="input-group-append">
+                        <input class="btn btn-secondary btn-number" type="submit" value="Search"/>
+                    </div>
+                </div>
+            </form>
+
+            <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                <ul class="navbar-nav m-auto nmlist">
+                    <li class="nav-item" style="color:whitesmoke;">
+                        Ivot2000
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-success"><i class="fa fa-user"></i>
+                            View profile
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-light"><i class="fa fa-user"></i>
+                            Login
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-primary"><i class="fa fa-user-plus"></i>
+                            Sign up
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-danger"><i class="fa fa-user"></i>
+                            Logout
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

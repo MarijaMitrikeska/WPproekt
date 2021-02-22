@@ -2,12 +2,23 @@ package wp.com.demo.model;
 
 import lombok.Data;
 
-@Data
-public class Company {
+
+
+//@Data
+//@Entity
+/*public class Company {
+    @Id
     private String company_name;
+
     private String owner;
     private Integer employee_num;
     private Integer intern_num;
+
+    @ManyToOne
+    private User user;
+
+    public Company() {
+    }
 
     public Company(String company_name, String owner, Integer employee_num, Integer intern_num) {
         this.company_name= company_name;
@@ -16,3 +27,4 @@ public class Company {
         this.intern_num = intern_num;
     }
 }
+*/
