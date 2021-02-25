@@ -609,8 +609,8 @@ http://www.tooplate.com/view/2106-soft-landing
       CONTACT             
   -----------------------------------------*/
 
-  /*
-#contact-form .col-md-12,
+
+/*#contact-form .col-md-12,
   #contact-form .col-md-4 {
     padding-left: 0;
   }
@@ -626,6 +626,7 @@ http://www.tooplate.com/view/2106-soft-landing
 
   #contact-form .form-control:focus {
     border-bottom-color: #202020;
+
   }
 
   #contact-form input {

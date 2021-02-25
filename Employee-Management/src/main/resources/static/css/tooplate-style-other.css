@@ -609,7 +609,7 @@ footer {
     CONTACT
 -----------------------------------------*/
 
-#contact-form .col-md-12,
+/*#contact-form .col-md-12,
 #contact-form .col-md-4 {
     padding-left: 0;
 }
@@ -633,6 +633,7 @@ footer {
 
 #contact-form input[type='submit'] {
     background: #202020;
+    background: red;
     border-radius: 50px;
     border: 0;
     color: #ffffff;
@@ -643,7 +644,7 @@ footer {
     color: #ffffff;
 }
 
-
+*/
 
 /*---------------------------------------
    FOOTER

@@ -2,12 +2,16 @@ package wp.com.demo.model;
 
 import lombok.Data;
 
+import javax.persistence.*;
 
 
-//@Data
-//@Entity
-/*public class Company {
+@Data
+@Entity
+public class Company {
     @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
     private String company_name;
 
     private String owner;
@@ -27,4 +31,3 @@ import lombok.Data;
         this.intern_num = intern_num;
     }
 }
-*/
