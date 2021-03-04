@@ -57,10 +57,10 @@
 
 
                     <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                        <li><a href="/feed" class="smoothScroll">Manage companies</a></li>
+                        <li><a href="/manage-companies"class="smoothScroll">Manage companies</a></li>
                     </th:block>
                     <th:block sec:authorize="hasRole('ROLE_USER')">
-                        <li><a href="/feed" class="smoothScroll">View companies</a></li>
+                        <li><a href="/manage-companies" class="smoothScroll">View companies</a></li>
                     </th:block>
 
 
@@ -75,7 +75,7 @@
                 <li sec:authorize="!isAuthenticated()"><a href="/login">LOGIN</a></li>
                 <li sec:authorize="!isAuthenticated()"><a href="/register">SIGN UP</a></li>
                 <th:block th:if="${username} != null">
-                    <li><a href="/feed" id="pageUsername" th:text="${username}"></a></li>
+                    <li><a href="/manage-companies" id="pageUsername" th:text="${username}"></a></li>
                 </th:block>
                 <li sec:authorize="isAuthenticated()"><a href="/logout">LOGOUT</a></li>
             </ul>
@@ -107,11 +107,9 @@
 
 
 <!-- FOOTER -->
-<footer id="footer" data-stellar-background-ratio="0.5" style="height: 50px">
-
+<footer id="footer" data-stellar-background-ratio="0.5" style="height: 95px;">
     <div class="container">
-        <div class="row">
-
+        <div class="row" style="margin-left: 350px">
             <div class="copyright-text col-md-12 col-sm-12">
                 <div class="col-md-6 col-sm-6">
                     <p style="margin-top: 15px">Copyright &copy; 2021 EMANAGE</p>
@@ -125,11 +123,9 @@
                     </ul>
                 </div>
             </div>
-
         </div>
     </div>
 </footer>
-
 
 <!-- SCRIPTS -->
 <script src="../js/jquery.js"></script>

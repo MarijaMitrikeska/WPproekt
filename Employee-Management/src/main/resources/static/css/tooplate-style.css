@@ -233,7 +233,7 @@ http://www.tooplate.com/view/2106-soft-landing
     letter-spacing: -1px;
   }
 
-  .top-nav-collapse {
+ .top-nav-collapse {
     background: #ffffff;
   }
 
@@ -285,7 +285,7 @@ http://www.tooplate.com/view/2106-soft-landing
     }
 
     .custom-navbar.top-nav-collapse {
-      background: #ffffff;
+      /*background: #ffffff;*/
       -webkit-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
       -moz-box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
       box-shadow: 0 1px 30px rgba(0, 0, 0, 0.1);
@@ -301,7 +301,7 @@ http://www.tooplate.com/view/2106-soft-landing
     }
 
     .top-nav-collapse .nav .section-btn a {
-      color: #ffffff;
+      /*color: #ffffff;*/
     }
   }
 
@@ -651,9 +651,9 @@ http://www.tooplate.com/view/2106-soft-landing
      FOOTER              
   -----------------------------------------*/
 
-  /*footer {*/
-  /*  padding-bottom: 80px;*/
-  /*}*/
+  footer {
+  padding-bottom: 80px;
+  }
   
 
   .copyright-text p {
