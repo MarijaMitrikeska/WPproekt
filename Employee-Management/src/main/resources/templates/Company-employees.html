@@ -4,20 +4,23 @@
         <div class="profile-header">
             <div class="profile-header-cover"></div>
             <div class="profile-header-content">
+                <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">
                 <div class="profile-header-img">
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" />
                 </div>
                 <ul class="profile-header-tab nav nav-tabs nav-tabs-v2">
                     <li class="nav-item">
                         <a href="#profile-post" class="nav-link" data-toggle="tab">
-                            <div class="nav-field">Employees</div>
-                            <div class="nav-value">382</div>
+                            <div class="nav-field" >Employees</div>
+                            <div class="nav-value" th:text="${company.getEmployee_num()}"></div>
                         </a>
+
+
                     </li>
                     <li class="nav-item">
                         <a href="#profile-followers" class="nav-link active" data-toggle="tab">
                             <div class="nav-field">Interns</div>
-                            <div class="nav-value">1.3m</div>
+                            <div class="nav-value" th:text="${company.getIntern_num()}"></div>
                         </a>
                     </li>
 
@@ -28,13 +31,13 @@
         <div class="profile-container"><!--Company information-->
             <div class="profile-sidebar">
                 <div class="desktop-sticky-top">
-                    <h4>ExampleCompany</h4>
-                    <div class="font-weight-600 mb-3 text-muted mt-n2">@johnsmith</div>
-                    <p>
-                        Principal UXUI Design &amp; Brand Architecture for Studio. Creator of SeanTheme. Bringing the world closer together. Studied Computer Science and Psychology at Harvard University.
+                    <h4 th:text="${company.getName()}"></h4>
+                    <div class="font-weight-600 mb-3 text-muted mt-n2" th:text="${company.getOwner()}"></div>
+                    <p th:text="${company.getDescription()}">
+
                     </p>
-                    <div class="mb-1"><i class="fa fa-map-marker-alt fa-fw text-muted"></i> New York, NY</div>
-                    <div class="mb-3"><i class="fa fa-link fa-fw text-muted"></i> seantheme.com/studio</div>
+                    <div class="mb-1"><i class="fa fa-map-marker-alt fa-fw text-muted"></i> </div>
+                    <div class="mb-3"><i class="fa fa-link fa-fw text-muted"></i> </div>
                     <hr class="mt-4 mb-4" />
                 </div>
             </div>
@@ -44,16 +47,27 @@
                     <div class="col-xl-12">
                         <div class="tab-content p-0">
                             <div class="tab-pane fade active show" id="profile-followers">
-                                <div class="list-group">
-                                    <div class="list-group-item d-flex align-items-center">
+                                <div class="list-group" >
+                                    <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">
+                                    <div class="list-group-item d-flex align-items-center" th:each="employee : ${employees}">
                                         <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="50px" class="rounded-sm ml-n2" />
                                         <div class="flex-fill pl-3 pr-3">
-                                            <div><a href="#" class="text-dark font-weight-600">Ethel Wilkes</a></div>
-                                            <div class="text-muted fs-13px">North Raundspic</div>
+                                            <div class="text-dark font-weight-600" th:text="employee.getName()">Ethel Wilkes</div>
+                                            <div class="text-muted fs-13px" th:text="employee.getJobTitle()">North Raundspic</div>
                                         </div>
-                                        <a href="#" class="btn btn-outline-primary">See profile</a>
+                                        <a href="/employee-profile" class="btn btn-outline-primary">See profile</a>
                                     </div>
-                                    <div class="list-group-item d-flex align-items-center">
+                                    <div class="col mb-3">
+                                        <div class="row">
+
+                                                <a href="/employee-profile/add-employee" class="btn btn-block btn-dark add-product-btn">
+                                                    Add new employee
+                                                </a>
+
+                                        </div>
+                                    </div>
+
+                                    <!--<div class="list-group-item d-flex align-items-center">
                                         <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" width="50px" class="rounded-sm ml-n2" />
                                         <div class="flex-fill pl-3 pr-3">
                                             <div><a href="#" class="text-dark font-weight-600">Shanaya Hansen</a></div>
@@ -124,7 +138,7 @@
                                             <div class="text-muted fs-13px">Mount Lerdo</div>
                                         </div>
                                         <a href="#" class="btn btn-outline-primary">Follow</a>
-                                    </div>
+                                    </div>-->
                                 </div>
                                 <!--<div class="text-center p-3">
                                     <a href="#" class="text-dark text-decoration-none">Show more <b class="caret"></b></a>

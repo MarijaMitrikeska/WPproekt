@@ -21,7 +21,8 @@ public class User implements UserDetails {
 
     private String email;
     private String password;
-
+//TODO: site exc sho fala
+    //TODO:username veke postoi, password ne odgovara, mejl veke postoi
 
     private boolean isAccountNonExpired = true;
     private boolean isAccountNonLocked = true;

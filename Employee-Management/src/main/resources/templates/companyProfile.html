@@ -1,0 +1,143 @@
+<section xmlns:th="http://www.thymeleaf.org"
+         xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+    <div class="container bootstrap snippets bootdey autoScroll">
+        <div class="profile card">
+            <div class="profile-body">
+                <div class="profile-bio">
+                    <div class="row">
+                        <div class="col-md-5 text-center">
+                            <img class="img-thumbnail md-margin-bottom-10"  alt="">
+                        </div>
+                        <div class="col-md-7">
+                            <span><strong>Company name</strong></span><h2 th:text="${company.getName()}" ></h2>
+                            <h6 Moto></h6>  <h5 th:text="${company.getMoto()}"></h5>
+                            <h6 Description></h6>  <h5 th:text="${company.getDescription()}"></h5>
+                            <hr>
+                            <h5>Information about the company</h5>
+                            <h5>Owner</h5><p th:text="${company.getOwner()}">!</p>
+                            <h5> Number of employees </h5> <p th:text="${company.getEmployee_num()}"></p>
+                            <h5> Number of interns </h5>  <p th:text="${company.getIntern_num()}"></p>
+                            <th:block sec:authorize="hasRole('ROLE_USER')">
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-7 col-lg-8">
+                                        <div class="section-tittle text-center mt-40">
+                                <a th:href="@{'/company-profile/edit/{id}' (id=${company.getId()})}" class="btn btn-sm btn-info company-description">Edit</a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </th:block>
+                            <th:block sec:authorize="hasRole('ROLE_USER')">
+                                <div class="row justify-content-center">
+                                    <div class="col-xl-7 col-lg-8">
+                                        <div class="section-tittle text-center mt-40">
+                                            <a  th:href="@{'/employees/{id}' (id=${company.getId()})}" class="border-btn">See employees</a>
+                                            <!--<a href="/employees" class="border-btn">See employees</a>-->
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </th:block>
+
+
+                        </div>
+
+
+
+
+
+                        <!--<div>
+                            <a href="/employee-profile/add-employee" class="btn btn-block btn-dark add-product-btn">
+                                Add new employee
+                            </a>
+                        </div>-->
+
+                    </div>
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+    <br>
+    <!-- ZA KORISNIK -->
+       <!-- <div class="container">
+            <div class="row bootstrap snippets bootdeys">
+                <div class="col-md-8 col-sm-12">
+                    <div class="comment-wrapper">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">My saved ads</h3>
+                            </div>
+                            <div class="panel-body">
+                                <br>
+                                <div class="clearfix"></div>
+                                <ul class="media-list">
+                                    <li class="media" >
+                                        <img  alt="" class="img-circle">
+                                        <div class="media-body">
+                                            <span class="text-muted pull-right">
+                                                <small class="text-muted" ></small>
+                                            </span>
+                                            <a class="mlElem" ><strong class="text-success" ></strong></a>
+                                            <p class="mlElem" style="font-size: 20px; font-weight: bold;" ></p>
+                                            <p class="mlElem" ></p>
+                                            <form method="get" >
+
+                                                    <button type="submit" name="personButton" value="email" class="btn btn-outline-success media-bottom">Send e-mail</button>
+                                                    <button type="submit" name="personButton" value="delete" class="btn btn-outline-danger media-bottom">Delete from saved ads</button>
+
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>-->
+   <!--
+    <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${isCompany}"> --><!-- ZA KOMPANIJA -->
+        <!--<div class="container">
+            <div class="row bootstrap snippets bootdeys">
+                <div class="col-md-8 col-sm-12">
+                    <div class="comment-wrapper">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Posted ads</h3>
+                            </div>
+                            <div class="panel-body">
+                                <br>
+                                <div class="clearfix"></div>
+                                <ul class="media-list">
+                                    <li class="media" th:each="ad : ${companyAds}">
+                                        <img th:src="${ad.getCompany().getImageSourceUrl()}" alt="" class="img-circle">
+                                        <div class="media-body">
+                                            <span class="text-muted pull-right">
+                                                <small class="text-muted" th:text="${ad.getTimestamp()}"></small>
+                                            </span>
+                                            <strong class="text-success mlElem" th:text="${ad.getCompany().getName()}"></strong>
+                                            <p class="mlElem" style="font-size: 20px; font-weight: bold;" th:text="${ad.getHeader()}"></p>
+                                            <p class="mlElem" th:text="${ad.getBody()}"></p>
+                                            <form method="get" th:action="@{'/profile/company_buttons_back/{id}' (id=${ad.getId()})}">
+                                                <th:block th:if="${ad.getCompany().getId() == #request.getRemoteUser() || isAdmin == true}">
+                                                    <button type="submit" name="otherButton" value="delete" class="btn btn-outline-danger media-bottom">Delete</button>
+                                                </th:block>
+                                                <th:block th:if="${ad.getCompany().getId() == #request.getRemoteUser()}">
+                                                    <button type="submit" name="otherButton" value="edit" class="btn btn-outline-dark media-bottom">Edit</button>
+                                                </th:block>
+                                            </form>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </th:block>-->
+</section>
