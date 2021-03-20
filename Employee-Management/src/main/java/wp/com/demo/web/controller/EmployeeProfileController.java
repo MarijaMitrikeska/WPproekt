@@ -38,6 +38,7 @@ public class EmployeeProfileController {
         if (this.employeeService.findById(id).isPresent()) {
             Employee employee = this.employeeService.findById(id).get();
             model.addAttribute("employee", employee);
+
             model.addAttribute("bodyContent", "employee-profile");
             return "master-template";
 
@@ -67,6 +68,7 @@ public class EmployeeProfileController {
 
         if (this.companyService.findById(id).isPresent()) {
             Company company = this.companyService.findById(id).get();
+
             model.addAttribute("company", company);
             model.addAttribute("bodyContent", "add-employee");
             return "master-template";
@@ -98,29 +100,35 @@ public class EmployeeProfileController {
             @RequestParam Integer salary,
             @RequestParam Integer experience,
             @RequestParam("personImage") MultipartFile profilePicture) throws IOException {
+        if (this.companyService.findById(id).isPresent()) {
+            Company company = this.companyService.findById(id).get();
 
-        if (this.employeeService.findById(id).isPresent()) {
-            Employee employee = this.employeeService.findById(id).get();
-            model.addAttribute("employee", employee);
+            model.addAttribute("company", company);
 
-            if (!profilePicture.isEmpty()) {
-                File picture_target = new File(profilePicture.getOriginalFilename());
+            if (this.employeeService.findById(id).isPresent()) {
+                Employee employee = this.employeeService.findById(id).get();
+                model.addAttribute("employee", employee);
+
+                if (!profilePicture.isEmpty()) {
+                    File picture_target = new File(profilePicture.getOriginalFilename());
 //                    (targetFolderImagePPPath + request.getRemoteUser() + "." + profilePicture.getOriginalFilename().split("\\.")[1]);
-                if (picture_target.exists()) {
-                    picture_target.delete();
+                    if (picture_target.exists()) {
+//                    picture_target.delete();
+
+                    }
+                    if (id != null) {
+                        this.employeeService.edit(id, name, surname, profilePicture, "../ProfilePictures/", embg, email, street, city, country, jobTitle, department, employmentDate, status,
+                                phone, projects, salary, experience);
+                    }
 
                 }
-                if (id != null) {
-                    this.employeeService.edit(id, name, surname, profilePicture, "../ProfilePictures/", embg, email, street, city, country, jobTitle, department, employmentDate, status,
-                            phone, projects, salary, experience);
-                }
-
             } else {
 
                 this.employeeService.save(name, surname, profilePicture, "../ProfilePictures/", embg, email, street, city, country, jobTitle, department, employmentDate, status,
                         phone, projects, salary, experience);
             }
         }
+
 
             return "redirect:/employee-profile/{id}";
         }

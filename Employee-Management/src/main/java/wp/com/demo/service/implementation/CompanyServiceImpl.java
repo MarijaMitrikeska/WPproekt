@@ -45,11 +45,11 @@ public class CompanyServiceImpl  implements CompanyService {
 //    }
 
     @Override
-    public Company update(String name, String description, String moto, String owner, MultipartFile profilePicture, String imageSource, Integer employee, Integer interns) {
+    public Company update(User user,String name, String description, String moto, String owner, MultipartFile profilePicture, String imageSource, Integer employee, Integer interns) {
         if (name==null || name.isEmpty()){
             throw new IllegalArgumentException();
         }
-        Company company=new Company(name,description,moto,owner,imageSource,employee,interns);
+        Company company=new Company(user,name,description,moto,owner,imageSource,employee,interns);
         companyRepository.save(company);
         return company;
 
@@ -96,7 +96,7 @@ public class CompanyServiceImpl  implements CompanyService {
 
     @Override
     @Transactional
-    public Optional<Company> edit(Long id, String name, String desc ,String owner, String moto, MultipartFile profilePicture,String imageSource, Integer numEm,Integer numInt) {
+    public Optional<Company> edit(User user,Long id, String name, String desc ,String owner, String moto, MultipartFile profilePicture,String imageSource, Integer numEm,Integer numInt) {
        Company company=this.companyRepository.findById(id).orElseThrow(IllegalArgumentException::new);
    company.setName(name);
    company.setDescription(desc);
@@ -112,8 +112,8 @@ public class CompanyServiceImpl  implements CompanyService {
     }
 
     @Override
-    public Optional<Company> save(String name, String desc ,String owner, String moto,  MultipartFile profilePicture,String imageSource,Integer numEm, Integer numInt) {
-      return Optional.of(this.companyRepository.save(new Company(name,desc,owner,moto,imageSource,numEm,numInt)));
+    public Optional<Company> save(User user,String name, String desc ,String owner, String moto,  MultipartFile profilePicture,String imageSource,Integer numEm, Integer numInt) {
+      return Optional.of(this.companyRepository.save(new Company(user,name,desc,owner,moto,imageSource,numEm,numInt)));
     }
 
     @Override
@@ -122,7 +122,7 @@ public class CompanyServiceImpl  implements CompanyService {
     }
 
     @Override
-    public Company addEmployeeToCompany(String username, Long employeeId) {
+    public Company addEmployeeToCompany(User username, Long employeeId) {
         Company company=this.getCompany(username).orElseThrow(()->new IllegalArgumentException());
         Employee employee=this.employeeService.findById(employeeId)
                 .orElseThrow(()->new IllegalArgumentException());
@@ -136,9 +136,11 @@ public class CompanyServiceImpl  implements CompanyService {
     }
 
     @Override
-    public Optional<Company> getCompany(String username) {
-        User user=this.userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username));
-        return this.companyRepository.findByUser(user);
+    public Optional<Company> getCompany(User username) {
+
+
+//        User user=this.userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username));
+        return this.companyRepository.findByUser(username);
 //                .orElseGet(()->{
 //            Company company=new Company(user);
 //        })

@@ -29,17 +29,17 @@
 
                 </ul>
                 <div class="profile-content" id="employees">
-                    <div class="row">
+                    <div class="row" th:if="${employees.size()>0}">
 
 
 
-                        <div class="col-xl-12" th:if="${employees.size()>0}">
+                        <div class="col-xl-12" th:each="employee:${employees}">
                             <div class="tab-content p-0">
                                 <div class="tab-pane fade active show" id="profile-followers">
                                     <div class="list-group" >
 
                                         <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">
-                                        <div class="list-group-item d-flex align-items-center" th:each="employee:${employees}">
+                                        <div class="list-group-item d-flex align-items-center" >
 <!--                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="50px" class="rounded-sm ml-n2" />-->
                                             <img width="50px" class="rounded-sm ml-n2" th:src="${employee.getImageSource()}" alt="">
                                             <div class="flex-fill pl-3 pr-3">
@@ -154,7 +154,7 @@
     </div>
     <div class="col mb-3">
         <div class="row">
-            <a th:href="@{'/employee-profile/add-employee/{id}'(id=${company.getId()})}" class="btn btn-block btn-dark add-product-btn">
+            <a th:href="@{'/employee-profile/add/{id}'(id=${company.getId()})}" class="btn btn-block btn-dark add-product-btn">
                 Add new employee
             </a>
 

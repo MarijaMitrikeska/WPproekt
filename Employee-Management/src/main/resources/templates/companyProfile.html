@@ -19,7 +19,7 @@
                             <h5> Number of interns </h5>  <p th:text="${company.getIntern_num()}"></p>
 
 
-<!--                            <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${companyUser} eq ${username}">-->
+                            <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${company.getUser().getUsername() } == ${username}">
 
                                 <div class="row justify-content-center">
                                     <div class="col-xl-7 col-lg-8">
@@ -40,7 +40,7 @@
                                     </div>
                                 </div>
 
-<!--                            </th:block>-->
+                            </th:block>
 
 
                         </div>

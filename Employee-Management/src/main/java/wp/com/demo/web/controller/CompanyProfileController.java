@@ -1,5 +1,6 @@
 package wp.com.demo.web.controller;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,8 +35,26 @@ public class CompanyProfileController {
     //TODO: redirect errori da sredam
 //    @GetMapping("/{id}")
     @GetMapping("/{id}")
-    public String getCompanyPage(@PathVariable Long id, HttpServletRequest request, Model model) {
-        Company company = this.companyService.findById(id).get();
+    public String getCompanyPage(@PathVariable Long id, HttpServletRequest request, Model model, Authentication authentication) {
+        if (this.companyService.findById(id).isPresent()) {
+            Company company = this.companyService.findById(id).get();
+
+            User user= (User) authentication.getPrincipal();
+            if (request.getRemoteUser() != null) {
+
+
+                String username=request.getRemoteUser();
+//                User user=  this.userService.getUsername(username);
+
+//
+//            String companyUser=this.companyService.findById(id).get().getUser().getUsername();
+//                String companyUser=;
+                model.addAttribute("username", request.getRemoteUser());
+//                model.addAttribute("companyUser",this.companyService.getCompany(user).toString() );
+                model.addAttribute("company", company);
+                model.addAttribute("bodyContent", "companyProfile");
+                return "master-template";
+            }
 
 //        if (this.companyService.findById(id).isPresent()) {
 //            Company company = this.companyService.findById(id).get();
@@ -44,22 +63,26 @@ public class CompanyProfileController {
 //            model.addAttribute("companyUser",companyUser);
 //            model.addAttribute("username",username);
 //            model.addAttribute("company", company);
+//
+//        }
+
+//        if (this.companyService.findById(id).isPresent()) {
+//            String username = request.getRemoteUser();
+//            if (this.companyService.getCompany(username).isPresent())
+//                model.addAttribute("company", company);
 //            model.addAttribute("bodyContent", "companyProfile");
 //            return "master-template";
 //        }
-
-        if (this.companyService.findById(id).isPresent()) {
-            String username = request.getRemoteUser();
-            if (this.companyService.getCompany(username).isPresent())
+            else {
+//                Company company = this.companyService.findById(id).get();
                 model.addAttribute("company", company);
-            model.addAttribute("bodyContent", "companyProfile");
-            return "master-template";
+                model.addAttribute("bodyContent", "companyProfile");
+
+
+            }
         }
-        else {
-            model.addAttribute("company", company);
-            model.addAttribute("bodyContent", "companyProfile");
-        }
-        return "redirect:/home";
+//        return "master-template";
+        return "master-template";
 
 
 //            if (company.getUser().getUsername().equals(request.getRemoteUser())) {
@@ -112,6 +135,7 @@ public class CompanyProfileController {
 
         @PostMapping("/add")
         public String saveCompany (
+                HttpServletRequest request,
                 @RequestParam(required = false) Long id,
                 @RequestParam String name,
                 @RequestParam String description,
@@ -121,23 +145,26 @@ public class CompanyProfileController {
                 @RequestParam Integer numInterns,
                 @RequestParam("image") MultipartFile profilePicture) throws IOException {
 //
+            String username=request.getRemoteUser();
+
+          User user=  this.userService.getUsername(username);
             if (!profilePicture.isEmpty()) {
                 File picture_target = new File(profilePicture.getOriginalFilename());
 //                    (targetFolderImagePPPath + request.getRemoteUser() + "." + profilePicture.getOriginalFilename().split("\\.")[1]);
-                if (picture_target.exists()) {
-                    picture_target.delete();
-
-                }
+//                if (picture_target.exists()) {
+////                    picture_target.delete();
+//
+//                }
                 if (id != null) {
                     profilePicture.transferTo(picture_target);
-                    this.companyService.edit(id, name, description, moto, owner, profilePicture, "../ProfilePictures/" + picture_target.getName(), numEmployee, numInterns);
+                    this.companyService.edit(user,id, name, description, moto, owner, profilePicture, "../ProfilePictures/" + picture_target.getName(), numEmployee, numInterns);
 
 //                return "redirect:/manage-companies";
                 }
             } else {
 
 
-                this.companyService.save(name, description, moto, owner, profilePicture, "../ProfilePictures/", numEmployee, numInterns);
+                this.companyService.save(user,name, description, moto, owner, profilePicture, "../ProfilePictures/", numEmployee, numInterns);
             }
             return "redirect:/manage-companies";
 

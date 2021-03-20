@@ -11,6 +11,8 @@ public interface UserService extends UserDetailsService {
 
     Optional<User> findByUsername(String username);
     User getUserInstanceByUUID(Long uuid);
+    User getUsername(String username);
+
 
 }
 

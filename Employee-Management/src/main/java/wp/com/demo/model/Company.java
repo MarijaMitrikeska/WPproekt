@@ -44,7 +44,7 @@ public class Company {
     public Company() {
     }
 
-    public Company( String name, String description, String moto, String owner,  String imageSource,Integer employee_num, Integer intern_num) {
+    public Company( User user,String name, String description, String moto, String owner,  String imageSource,Integer employee_num, Integer intern_num) {
 
         this.name = name;
         this.description = description;
@@ -53,5 +53,6 @@ public class Company {
         this.employee_num = employee_num;
         this.intern_num = intern_num;
         this.imageSource=imageSource;
+        this.user=user;
     }
 }
