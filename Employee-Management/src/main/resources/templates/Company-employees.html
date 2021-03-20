@@ -6,25 +6,132 @@
             <div class="profile-header-content">
                 <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">
                 <div class="profile-header-img">
-                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" />
+<!--                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" />-->
+                    <img th:src="${company.getImageSource()}" alt="">
                 </div>
                 <ul class="profile-header-tab nav nav-tabs nav-tabs-v2">
                     <li class="nav-item">
-                        <a href="#profile-post" class="nav-link" data-toggle="tab">
+                        <a href="#profile-post" class="nav-link" data-target="#employees" data-toggle="tab">
                             <div class="nav-field" >Employees</div>
                             <div class="nav-value" th:text="${company.getEmployee_num()}"></div>
                         </a>
 
 
+
+
                     </li>
                     <li class="nav-item">
-                        <a href="#profile-followers" class="nav-link active" data-toggle="tab">
+                        <a href="#profile-followers" class="nav-link active" data-target="#interns" data-toggle="tab">
                             <div class="nav-field">Interns</div>
                             <div class="nav-value" th:text="${company.getIntern_num()}"></div>
                         </a>
                     </li>
 
                 </ul>
+                <div class="profile-content" id="employees">
+                    <div class="row">
+
+
+
+                        <div class="col-xl-12" th:if="${employees.size()>0}">
+                            <div class="tab-content p-0">
+                                <div class="tab-pane fade active show" id="profile-followers">
+                                    <div class="list-group" >
+
+                                        <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">
+                                        <div class="list-group-item d-flex align-items-center" th:each="employee:${employees}">
+<!--                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="50px" class="rounded-sm ml-n2" />-->
+                                            <img width="50px" class="rounded-sm ml-n2" th:src="${employee.getImageSource()}" alt="">
+                                            <div class="flex-fill pl-3 pr-3">
+                                                <div class="text-dark font-weight-600" th:text="${employee.getName()}"></div>
+                                                <div class="text-muted fs-13px" th:text="${employee.getJobTitle()}"></div>
+                                            </div>
+
+                                            <a th:href="@{'/employee-profile/{id}'(id=${employee.getId()})}" class="btn btn-outline-primary">See profile</a>
+                                        </div>
+
+
+                                        <!--<div class="list-group-item d-flex align-items-center">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                                            <div class="flex-fill pl-3 pr-3">
+                                                <div><a href="#" class="text-dark font-weight-600">Shanaya Hansen</a></div>
+                                                <div class="text-muted fs-13px">North Raundspic</div>
+                                            </div>
+                                            <a href="#" class="btn btn-outline-primary">Follow</a>
+                                        </div>
+                                        <div class="list-group-item d-flex align-items-center">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                                            <div class="flex-fill pl-3 pr-3">
+                                                <div><a href="#" class="text-dark font-weight-600">James Allman</a></div>
+                                                <div class="text-muted fs-13px">North Raundspic</div>
+                                            </div>
+                                            <a href="#" class="btn btn-outline-primary">Follow</a>
+                                        </div>
+                                        <div class="list-group-item d-flex align-items-center">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                                            <div class="flex-fill pl-3 pr-3">
+                                                <div><a href="#" class="text-dark font-weight-600">Marie Welsh</a></div>
+                                                <div class="text-muted fs-13px">Crencheporford</div>
+                                            </div>
+                                            <a href="#" class="btn btn-outline-primary">Follow</a>
+                                        </div>
+                                        <div class="list-group-item d-flex align-items-center">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                                            <div class="flex-fill pl-3 pr-3">
+                                                <div><a href="#" class="text-dark font-weight-600">Lamar Kirkland</a></div>
+                                                <div class="text-muted fs-13px">Prince Ewoodswan</div>
+                                            </div>
+                                            <a href="#" class="btn btn-outline-primary">Follow</a>
+                                        </div>
+                                        <div class="list-group-item d-flex align-items-center">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                                            <div class="flex-fill pl-3 pr-3">
+                                                <div><a href="#" class="text-dark font-weight-600">Bentley Osborne</a></div>
+                                                <div class="text-muted fs-13px">Red Suvern</div>
+                                            </div>
+                                            <a href="#" class="btn btn-outline-primary">Follow</a>
+                                        </div>
+                                        <div class="list-group-item d-flex align-items-center">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                                            <div class="flex-fill pl-3 pr-3">
+                                                <div><a href="#" class="text-dark font-weight-600">Ollie Goulding</a></div>
+                                                <div class="text-muted fs-13px">Doa</div>
+                                            </div>
+                                            <a href="#" class="btn btn-outline-primary">Follow</a>
+                                        </div>
+                                        <div class="list-group-item d-flex align-items-center">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                                            <div class="flex-fill pl-3 pr-3">
+                                                <div><a href="#" class="text-dark font-weight-600">Hiba Calvert</a></div>
+                                                <div class="text-muted fs-13px">Stemunds</div>
+                                            </div>
+                                            <a href="#" class="btn btn-outline-primary">Follow</a>
+                                        </div>
+                                        <div class="list-group-item d-flex align-items-center">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                                            <div class="flex-fill pl-3 pr-3">
+                                                <div><a href="#" class="text-dark font-weight-600">Rivka Redfern</a></div>
+                                                <div class="text-muted fs-13px">Fallnee</div>
+                                            </div>
+                                            <a href="#" class="btn btn-outline-primary">Follow</a>
+                                        </div>
+                                        <div class="list-group-item d-flex align-items-center">
+                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="50px" class="rounded-sm ml-n2" />
+                                            <div class="flex-fill pl-3 pr-3">
+                                                <div><a href="#" class="text-dark font-weight-600">Roshni Fernandez</a></div>
+                                                <div class="text-muted fs-13px">Mount Lerdo</div>
+                                            </div>
+                                            <a href="#" class="btn btn-outline-primary">Follow</a>
+                                        </div>-->
+                                    </div>
+                                    <!--<div class="text-center p-3">
+                                        <a href="#" class="text-dark text-decoration-none">Show more <b class="caret"></b></a>
+                                    </div>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -42,112 +149,20 @@
                 </div>
             </div>
 
-            <div class="profile-content">
-                <div class="row">
-                    <div class="col-xl-12">
-                        <div class="tab-content p-0">
-                            <div class="tab-pane fade active show" id="profile-followers">
-                                <div class="list-group" >
-                                    <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">
-                                    <div class="list-group-item d-flex align-items-center" th:each="employee : ${employees}">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="50px" class="rounded-sm ml-n2" />
-                                        <div class="flex-fill pl-3 pr-3">
-                                            <div class="text-dark font-weight-600" th:text="employee.getName()">Ethel Wilkes</div>
-                                            <div class="text-muted fs-13px" th:text="employee.getJobTitle()">North Raundspic</div>
-                                        </div>
-                                        <a href="/employee-profile" class="btn btn-outline-primary">See profile</a>
-                                    </div>
-                                    <div class="col mb-3">
-                                        <div class="row">
 
-                                                <a href="/employee-profile/add-employee" class="btn btn-block btn-dark add-product-btn">
-                                                    Add new employee
-                                                </a>
+        </div>
+    </div>
+    <div class="col mb-3">
+        <div class="row">
+            <a th:href="@{'/employee-profile/add-employee/{id}'(id=${company.getId()})}" class="btn btn-block btn-dark add-product-btn">
+                Add new employee
+            </a>
 
-                                        </div>
-                                    </div>
+<!--            <a href="/employee-profile/add-employee" class="btn btn-block btn-dark add-product-btn">-->
+<!--                Add new employee-->
+<!--            </a>-->
+<!--            <a  th:href="@{'/employees/{id}' (id=${company.getId()})}" class="border-btn">See employees</a-->
 
-                                    <!--<div class="list-group-item d-flex align-items-center">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="" width="50px" class="rounded-sm ml-n2" />
-                                        <div class="flex-fill pl-3 pr-3">
-                                            <div><a href="#" class="text-dark font-weight-600">Shanaya Hansen</a></div>
-                                            <div class="text-muted fs-13px">North Raundspic</div>
-                                        </div>
-                                        <a href="#" class="btn btn-outline-primary">Follow</a>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" width="50px" class="rounded-sm ml-n2" />
-                                        <div class="flex-fill pl-3 pr-3">
-                                            <div><a href="#" class="text-dark font-weight-600">James Allman</a></div>
-                                            <div class="text-muted fs-13px">North Raundspic</div>
-                                        </div>
-                                        <a href="#" class="btn btn-outline-primary">Follow</a>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar4.png" alt="" width="50px" class="rounded-sm ml-n2" />
-                                        <div class="flex-fill pl-3 pr-3">
-                                            <div><a href="#" class="text-dark font-weight-600">Marie Welsh</a></div>
-                                            <div class="text-muted fs-13px">Crencheporford</div>
-                                        </div>
-                                        <a href="#" class="btn btn-outline-primary">Follow</a>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" width="50px" class="rounded-sm ml-n2" />
-                                        <div class="flex-fill pl-3 pr-3">
-                                            <div><a href="#" class="text-dark font-weight-600">Lamar Kirkland</a></div>
-                                            <div class="text-muted fs-13px">Prince Ewoodswan</div>
-                                        </div>
-                                        <a href="#" class="btn btn-outline-primary">Follow</a>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="" width="50px" class="rounded-sm ml-n2" />
-                                        <div class="flex-fill pl-3 pr-3">
-                                            <div><a href="#" class="text-dark font-weight-600">Bentley Osborne</a></div>
-                                            <div class="text-muted fs-13px">Red Suvern</div>
-                                        </div>
-                                        <a href="#" class="btn btn-outline-primary">Follow</a>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" width="50px" class="rounded-sm ml-n2" />
-                                        <div class="flex-fill pl-3 pr-3">
-                                            <div><a href="#" class="text-dark font-weight-600">Ollie Goulding</a></div>
-                                            <div class="text-muted fs-13px">Doa</div>
-                                        </div>
-                                        <a href="#" class="btn btn-outline-primary">Follow</a>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar8.png" alt="" width="50px" class="rounded-sm ml-n2" />
-                                        <div class="flex-fill pl-3 pr-3">
-                                            <div><a href="#" class="text-dark font-weight-600">Hiba Calvert</a></div>
-                                            <div class="text-muted fs-13px">Stemunds</div>
-                                        </div>
-                                        <a href="#" class="btn btn-outline-primary">Follow</a>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="" width="50px" class="rounded-sm ml-n2" />
-                                        <div class="flex-fill pl-3 pr-3">
-                                            <div><a href="#" class="text-dark font-weight-600">Rivka Redfern</a></div>
-                                            <div class="text-muted fs-13px">Fallnee</div>
-                                        </div>
-                                        <a href="#" class="btn btn-outline-primary">Follow</a>
-                                    </div>
-                                    <div class="list-group-item d-flex align-items-center">
-                                        <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="50px" class="rounded-sm ml-n2" />
-                                        <div class="flex-fill pl-3 pr-3">
-                                            <div><a href="#" class="text-dark font-weight-600">Roshni Fernandez</a></div>
-                                            <div class="text-muted fs-13px">Mount Lerdo</div>
-                                        </div>
-                                        <a href="#" class="btn btn-outline-primary">Follow</a>
-                                    </div>-->
-                                </div>
-                                <!--<div class="text-center p-3">
-                                    <a href="#" class="text-dark text-decoration-none">Show more <b class="caret"></b></a>
-                                </div>-->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

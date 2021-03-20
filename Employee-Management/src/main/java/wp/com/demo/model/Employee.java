@@ -5,6 +5,8 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 
@@ -28,20 +30,21 @@ public class Employee {
     private String jobTitle;
     private String department;
 
-    @Temporal(TemporalType.DATE)
-    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-    private Date employmentDate;
+//    @Temporal(TemporalType.DATE)
+//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    private LocalDate employmentDate;
     private String status;
     private String phone;
     private Integer projects;
     private Integer salary;
     private Integer experience;
+    private String imageSource;
 
 
     public Employee() {
     }
 
-    public Employee( String name, String surname, String embg, String email, String street, String city, String country, String jobTitle, String department, Date employmentDate, String status, String phone, Integer projects, Integer salary, Integer experience) {
+    public Employee( String name, String surname,String imageSource, String embg, String email, String street, String city, String country, String jobTitle, String department, LocalDate employmentDate, String status, String phone, Integer projects, Integer salary, Integer experience) {
 
         this.name = name;
         this.surname = surname;
@@ -61,5 +64,6 @@ public class Employee {
         this.projects = projects;
         this.salary = salary;
         this.experience = experience;
+        this.imageSource=imageSource;
     }
 }

@@ -9,8 +9,18 @@
                     <!--<figure>
                         <img class="img-responsive img-circle img-thumbnail img-user" src="https://bootdey.com/img/Content/avatar/avatar7.png">
                     </figure>-->
-                    <form action="/company-profile/add" method="POST">
+
+                    <form action="/company-profile/add" method="POST" th:object="${company}" enctype="multipart/form-data">
                         <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">
+
+                        <div class="form-group">
+                            <label for="name" path="image">Profile picture</label>
+                            <!--                            <div class="col-lg-9">-->
+                            <input class="form-control" type="file" name="image" accept="image/png, image/jpeg" th:src="${company.getImageSource()}"
+                            th:value="${company.getImageSource()}">
+                            <!--                                </div>-->
+                        </div>
+
                         <div class="form-group">
                             <label for="name">Company name</label>
                             <input type="text"

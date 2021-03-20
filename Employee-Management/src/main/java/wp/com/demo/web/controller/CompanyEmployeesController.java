@@ -27,9 +27,10 @@ public class CompanyEmployeesController {
         this.companyRepository = companyRepository;
         this.employeeService = employeeService;
     }
+    //TODO: da stavam id spored koe ke se zacuvuvaat vrabotenite koi se dodavaat
 
     //@GetMapping("/{id}")
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public String getEmployeePage(@PathVariable Long id, Model model){
         if (this.companyService.findById(id).isPresent()){
 
@@ -41,7 +42,7 @@ public class CompanyEmployeesController {
             return "master-template";
         }
 
-        return "redirect/:company?error=CompanyNotFound";
+        return "redirect:/home";
     }
 
 

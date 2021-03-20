@@ -137,12 +137,13 @@ Life-changing travel must also be sustainable travel. By bringing together a gro
                             </div>
                         </div>
                     </div>-->
-
+<!--                    <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">-->
                     <div class="col-lg-4" th:each="company:${companies}">
                         <div class="properties properties2 mb-30 company" >
                             <div class="properties__card">
                                 <div class="properties__img overlay1">
-                                    <a href="#"><img src="../images/Magna.png" alt=""></a>
+<!--                                    <a href="#"><img src="../images/Magna.png" alt=""></a>-->
+                                    <img th:src="${company.getImageSource()}" alt="">
                                 </div>
                                 <div class="properties__caption">
                                     <h3 th:text="${company.getName()}"></h3>
@@ -157,19 +158,22 @@ Life-changing travel must also be sustainable travel. By bringing together a gro
                                     </p>-->
 
                                    <!-- <a href="/company-profile" class="border-btn border-btn2">Read more</a>-->
-                                   <a th:href="@{'/company-profile/{id}' (id=${company.getId()})}"
-                                       class="btn btn-sm btn-info company-description">
+<!--                                    <th:block  th:if="${company.getUser()==#request.getRemoteUser()}">-->
+                                   <a th:href="@{'/company-profile/{id}' (id=${company.getId()})}" class="btn btn-sm btn-info company-description">
+<!--                                        <a href="/company-profile"-->
+
                                         <i class="fa fa-trash">Read More</i>
                                     </a>
+<!--                                    </th:block>-->
 
 
-                                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+<!--                                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">-->
                                         <form th:action="@{'/manage-companies/delete/{id}' (id=${company.getId()})}" th:method="DELETE">
                                             <button type="submit" class="btn-danger btn btn-dark delete-company">
                                                 <i class="fa fa-trash">Delete</i>
                                             </button>
                                         </form>
-                                    </th:block>
+<!--                                    </th:block>-->
 
                                 </div>
                             </div>
@@ -208,7 +212,7 @@ Life-changing travel must also be sustainable travel. By bringing together a gro
                     </div>
                 </div>
 
-                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+<!--                <th:block sec:authorize="hasRole('ROLE_ADMIN')">-->
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-8">
                         <div class="section-tittle text-center mt-40">
@@ -216,7 +220,7 @@ Life-changing travel must also be sustainable travel. By bringing together a gro
                         </div>
                     </div>
                 </div>
-                </th:block>
+<!--                </th:block>-->
             </div>
         </div>
         <!-- Companies area End -->

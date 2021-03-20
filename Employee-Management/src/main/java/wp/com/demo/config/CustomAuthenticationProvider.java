@@ -28,7 +28,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String password = authentication.getCredentials().toString();
 
 
-        if ("".equals(username) || "".equals(password)) {
+        if ("".equals(username) || username.isEmpty()|| "".equals(password)|| password.isEmpty()) {
             throw new BadCredentialsException("Invalid Credentials");
         }
 
@@ -40,6 +40,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         catch (UsernameNotFoundException exception){
             System.out.println(exception.getMessage());
         }
+        if (userDetails==null)throw new UsernameNotFoundException("User with the given username doesn't exist.");
+
 
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {
             throw new BadCredentialsException("Password is incorrect!");

@@ -6,12 +6,24 @@
             <div class="col-md-12">
 
                 <!--<article class="text-center">-->
-                    <!--<figure>
-                        <img class="img-responsive img-circle img-thumbnail img-user" src="https://bootdey.com/img/Content/avatar/avatar7.png">
-                    </figure>-->
-                    <form action="/manage-companies/add" method="POST">
+                    <!--<-->
+                    <form action="/manage-companies/add" method="POST" th:object="${company}" enctype="multipart/form-data">
+<!--                        <figure>-->
+<!--                       -->
+<!--&lt;!&ndash;                             src="https://bootdey.com/img/Content/avatar/avatar7.png">&ndash;&gt;-->
+<!--                        </figure>-->
                         <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">
-                        <div class="form-group">
+
+<!--                            <img class="img-responsive img-circle img-thumbnail img-user" name="imageSource" >-->
+
+<!--                                <label class="col-lg-3 col-form-label form-control-label">profile picture</label>-->
+                            <div class="form-group">
+                                <label for="name">Profile picture</label>
+<!--                            <div class="col-lg-9">-->
+                                    <input class="form-control" type="file" name="image" accept="image/png, image/jpeg">
+<!--                                </div>-->
+                            </div>
+                            <div class="form-group">
                             <label for="name">Company name</label>
                             <input type="text"
                                    class="form-control"

@@ -2,17 +2,20 @@
     <div class="container">
 <div class="tab-pane" id="edit">
 
-    <form action="/employee-profile/add" method="POST">
-        <input id="id" type="hidden" name="id" th:value="(${employee} != null ? ${employee.getId()} : '')">
+<!--    th:object="${company}"-->
+
+    <form th:action="@{'/employee-profile/add/{id}'(id=${company.getId()})}"  method="POST"  enctype="multipart/form-data">
+<!--       <input id="id" type="hidden" name="id" th:value="(${employee} != null ? ${employee.getId()} : '')">-->
         <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label">First name</label>
             <div class="col-lg-9">
                 <input class="form-control" type="text"
                        id="name"
                        name="name"
-                       th:value="(${employee} != null ? ${employee.getName()} : '')"
-
                        placeholder="Enter product name">
+
+                <!--                       th:value="(${employee} != null ? ${employee.getName()} : '')"-->
+
 
             </div>
         </div>
@@ -24,7 +27,7 @@
                        name="surname"
                        th:value="(${employee} != null ? ${employee.getSurname()} : '')"
 
-                       placeholder="Enter product name">
+                       placeholder="Enter employee NAME name">
             </div>
         </div>
         <div class="form-group row">
@@ -50,12 +53,13 @@
                        placeholder="Enter product name">
             </div>
         </div>
-        <!--<div class="form-group row">
+        <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label">Change profile</label>
             <div class="col-lg-9">
-                <input class="form-control" type="file">
+                <input class="form-control" type="file" name="personImage"  accept="image/png, image/jpeg">
+
             </div>
-        </div>-->
+        </div>
         <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label">Job Title</label>
             <div class="col-lg-9">
@@ -116,7 +120,8 @@
 
                        id="date"
                        name="employmentDate"
-                       th:value="(${employee} != null ? ${employee.getEmploymentDate()} : '')">
+                       th:datetime="(${employee} != null ? ${employee.getEmploymentDate()} : '')">
+<!--                       th:value="(${employee} != null ? ${employee.getEmploymentDate()} : '')">-->
 
                 <!--pattern="yyyy-MM-dd"-->
             </div>
@@ -220,7 +225,7 @@
             <label class="col-lg-3 col-form-label form-control-label"></label>
             <div class="col-lg-9">
                 <button type="submit" class="btn btn-primary" >Save Employee</button>
-                <a type="reset" class="btn btn-secondary" value="Cancel" href="/employees/">Cancel</a>
+                <a type="reset" class="btn btn-secondary"  href="/employees/">Cancel</a>
 
             </div>
         </div>

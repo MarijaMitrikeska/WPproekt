@@ -18,6 +18,15 @@
                         </div>
                     </div>
                 </th:block>
+                <th:block th:if="${Success}">
+                    <div class="flex-sb-m w-full p-b-30">
+                        <div>
+                            <label class="txt1 text-danger" th:text="${successMessage}">
+                            </label>
+                        </div>
+                    </div>
+                </th:block>
+
                 <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
                     <span class="label-input100">Username</span>
                     <input class="input100" type="text" name="username" placeholder="Enter username">
@@ -58,7 +67,7 @@
             </form>
                 <div class="container-login100-form-btn" style="color: #4674b8; padding-top: 10px">
                     <button class="login100-form-btn">
-                        <a href="/login" >Already have an account ? Login Here</a>
+                        <a href="/login" style="color: white";>Already have an account ? Login Here</a>
 
                     </button>
                 </div>

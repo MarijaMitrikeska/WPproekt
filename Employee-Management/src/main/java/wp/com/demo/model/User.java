@@ -31,9 +31,10 @@ public class User implements UserDetails {
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
+    @OneToOne(mappedBy = "user")
+    private Company company;
 
-   /* @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    private List<Company> company_name;*/
+
 
     public User() {
     }

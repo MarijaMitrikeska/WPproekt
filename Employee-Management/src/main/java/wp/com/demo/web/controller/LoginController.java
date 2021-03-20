@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import wp.com.demo.model.User;
 import wp.com.demo.model.exceptions.InvalidCredentialsException;
 import wp.com.demo.service.AuthenticationService;
@@ -28,11 +29,21 @@ public class LoginController {
 
 
     @GetMapping
-    public String getLoginPage(HttpServletRequest request,Model model){
+    public String getLoginPage(@RequestParam(required = false) String error,
+                               @RequestParam(required = false) String success
+                    ,Model model){
         /*if(request.getRemoteUser() != null)  {
 
             model.addAttribute("username",request.getRemoteUser() );
         }*/
+        if(error != null && !error.isEmpty()) {
+            model.addAttribute("hasError", true);
+            model.addAttribute("errorMessage", error);
+        }
+        else if(success != null && !success.isEmpty()) {
+            model.addAttribute("Success", true);
+            model.addAttribute("successMessage", success);
+        }
         model.addAttribute("bodyContent","login");
         return "master-template";
     }

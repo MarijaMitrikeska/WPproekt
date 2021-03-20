@@ -6,7 +6,7 @@
             <div class="card">
               <div class="card-body text-center bg-primary rounded-top">
                <div class="user-box">
-                <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="user avatar">
+                <img th:src="${employee.getImageSource()}" alt="user avatar">
               </div>
               <h5 class="mb-1 text-white" ></h5>
               <h6 class="text-light"  > </h6>
@@ -18,8 +18,8 @@
                     <i class="fa fa-phone-square"></i>
                   </div>
                   <div class="list-details">
-                      <span ></span><br/>
-                    <small>Mobile Number</small>
+                      <span th:text="${employee.getPhone()}" ></span><br/>
+                    <small >Mobile Phone</small>
                   </div>
                 </li>
                 <li class="list-group-item">
@@ -27,7 +27,7 @@
                     <i class="fa fa-envelope"></i>
                   </div>
                   <div class="list-details">
-                    <span >info@example.com</span><br/>
+                    <span th:text="${employee.getEmail()}"></span><br/>
                     <small >Email Address</small>
                   </div>
                 </li>
@@ -36,23 +36,23 @@
                     <i class="fa fa-globe"></i>
                   </div>
                   <div class="list-details">
-                    <span>Web Designer, UI/UX Engineer</span><br/>
+                    <span th:text="${employee.getJobTitle()}"></span><br/>
                     <small>Job Title</small>
                   </div>
                 </li>
                 </ul>
                 <div class="row text-center mt-4">
                   <div class="col p-2">
-                   <h4 class="mb-1 line-height-5" ></h4>
+                   <h4 class="mb-1 line-height-5" th:text="${employee.getProjects()}" ></h4>
                     <small class="mb-0 font-weight-bold">Projects</small>
                    </div>
                     <div class="col p-2">
-                      <h4 class="mb-1 line-height-5"  ></h4>
+                      <h4 class="mb-1 line-height-5"  th:text="${employee.getExperience()}"></h4>
                      <small class="mb-0 font-weight-bold">Years of experience</small>
                     </div>
                     <div class="col p-2">
-                     <h4 class="mb-1 line-height-5"  ></h4>
-                     <small class="mb-0 font-weight-bold">Salary</small>
+                     <h4 class="mb-1 line-height-5" th:text="${employee.getSalary()}"  ></h4>
+                     <small class="mb-0 font-weight-bold" ></small>
                     </div>
                  </div>
                </div>
@@ -85,24 +85,24 @@
                     <div class="row">
                         <div class="col-md-6">
                             <h6>Department</h6>
-                            <p >
+                            <p th:text="${employee.getDepartment()}">
 
                             </p>
                             <h6>Employment date</h6>
-                            <p>
-                                25.05.2020
+                            <p th:datetime="${employee.getEmploymentDate()}">
+
                             </p>
                             <h6>Recommendations</h6>
                             <p>
                                Netta, Web
                             </p>
                             <h6>Address</h6>
-                            <p>
-                                Skopje
+                            <p th:text="${employee.getStreet()}">
+
                             </p>
 
                             <h6>Status</h6>
-                            <p>
+                            <p th:text="${employee.getStatus()}">
                                 Active
                             </p>
 
@@ -265,91 +265,112 @@
                    <!-- <a th:href="@{'/employee-profile/edit/{id}'} (id=${employee.getId()})">-->
                         <div class="tab-pane" id="edit">
 
-                            <form action="/employee-profile/edit" method="POST">
-                        <div class="form-group row">
+                            <form th:action="@{'/employee-profile/add/{id}'(id=${company.getId()})}" method="POST"  enctype="multipart/form-data">
+<!--                                <input id="id" type="hidden" name="id" th:value="(${employee} != null ? ${employee.getId()} : '')">-->
+
+                                    <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">First name</label>
                             <div class="col-lg-9">
                                 <input class="form-control" type="text"
                                        id="name"
                                        name="name"
-                                      >
+                                       th:value="(${employee} != null ? ${employee.getName()} : '')"
+                                       placeholder="Enter company name">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Last name</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value="Jhonsan">
+                                <input class="form-control" type="text"
+                                       th:value="(${employee} != null ? ${employee.getSurname()} : '')"
+                                       placeholder="Enter company name">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Phone Number</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="email" value="mark@example.com">
+                                <input class="form-control" type="number" th:value="(${employee} != null ? ${employee.getPhone()} : '')"
+                                       placeholder="Enter company name">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Email</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="email" value="mark@example.com">
+                                <input class="form-control" type="email" th:value="(${employee} != null ? ${employee.getEmail()} : '')"
+                                       placeholder="Enter company name">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Change profile</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="file">
+                                <input class="form-control" type="file" name="personImage"  accept="image/png, image/jpeg">
+
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Job Title</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="url" value="">
+                                <input class="form-control" th:value="(${employee} != null ? ${employee.getJobTitle()} : '')"
+                                       placeholder="Enter company name">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Address</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value="" placeholder="Street">
+                                <input class="form-control" type="text" th:value="(${employee} != null ? ${employee.getStreet()} : '')"
+                                       placeholder="Enter company name">
                             </div>
 
 
                             <label class="col-lg-3 col-form-label form-control-label"></label>
                             <div class="col-lg-6">
-                                <input class="form-control" type="text" value="" placeholder="City">
+                                <input class="form-control" type="text" th:value="(${employee} != null ? ${employee.getCity()} : '')"
+                                       placeholder="Enter company name">
                             </div>
                             <div class="col-lg-3">
-                                <input class="form-control" type="text" value="" placeholder="State">
+                                <input class="form-control" type="text" th:value="(${employee} != null ? ${employee.getCountry()} : '')"
+                                       placeholder="Enter company name">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Department</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value="" placeholder="Street">
+                                <input class="form-control" type="text" th:value="(${employee} != null ? ${employee.getDepartment()} : '')"
+                                       placeholder="Enter company name">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Employment Date</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value="" placeholder="Street">
+                                <input class="form-control" type="date"
+
+                                       id="date"
+                                       name="employmentDate"
+                                       th:datetime="(${employee} != null ? ${employee.getEmploymentDate()} : '')">
+
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Status</label>
                             <div class="col-lg-9">
-                                <select>
-                                    <option>
-                                        Active
-                                    </option>
-                                    <option>
-                                        Resigned
-                                    </option>
-                                    <option>
+                                <input class="form-control" type="text" th:value="(${employee} != null ? ${employee.getStatus()} : '')"
+                                       placeholder="Enter company name">
 
-                                        On leave until <input type="datetime-local">
-                                    </option>
+                                <!--                                <select>-->
+<!--                                    <option>-->
+<!--                                        Active-->
+<!--                                    </option>-->
+<!--                                    <option>-->
+<!--                                        Resigned-->
+<!--                                    </option>-->
+<!--                                    <option>-->
 
-                                </select>
+<!--                                        On leave until <input type="datetime-local">-->
+<!--                                    </option>-->
+
+<!--                                </select>-->
                             </div>
                         </div>
                         <!--<div class="form-group row">
@@ -382,7 +403,8 @@
                             <label class="col-lg-3 col-form-label form-control-label"></label>
                             <div class="col-lg-9">
                                 <input type="reset" class="btn btn-secondary" value="Cancel">
-                                <input type="button" class="btn btn-primary" value="Save Changes">
+                                <button id="submit" type="submit" class="btn btn-default">Submit</button>
+<!--                                <input type="button" class="btn btn-primary" value="Save Changes">-->
                             </div>
                         </div>
                     </form>
@@ -390,6 +412,7 @@
                    <!-- </a>-->
 
                <!-- </th:block>-->
+
             </div>
 
         </div>

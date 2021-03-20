@@ -6,7 +6,7 @@
                 <div class="profile-bio">
                     <div class="row">
                         <div class="col-md-5 text-center">
-                            <img class="img-thumbnail md-margin-bottom-10"  alt="">
+                            <img class="img-thumbnail md-margin-bottom-10"  th:src="${company.getImageSource()}" alt="">
                         </div>
                         <div class="col-md-7">
                             <span><strong>Company name</strong></span><h2 th:text="${company.getName()}" ></h2>
@@ -17,7 +17,10 @@
                             <h5>Owner</h5><p th:text="${company.getOwner()}">!</p>
                             <h5> Number of employees </h5> <p th:text="${company.getEmployee_num()}"></p>
                             <h5> Number of interns </h5>  <p th:text="${company.getIntern_num()}"></p>
-                            <th:block sec:authorize="hasRole('ROLE_USER')">
+
+
+<!--                            <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${companyUser} eq ${username}">-->
+
                                 <div class="row justify-content-center">
                                     <div class="col-xl-7 col-lg-8">
                                         <div class="section-tittle text-center mt-40">
@@ -26,8 +29,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            </th:block>
-                            <th:block sec:authorize="hasRole('ROLE_USER')">
+<!--                            </th:block>-->
+<!--                            <th:block sec:authorize="hasRole('ROLE_USER')">-->
                                 <div class="row justify-content-center">
                                     <div class="col-xl-7 col-lg-8">
                                         <div class="section-tittle text-center mt-40">
@@ -37,7 +40,7 @@
                                     </div>
                                 </div>
 
-                            </th:block>
+<!--                            </th:block>-->
 
 
                         </div>

@@ -24,10 +24,15 @@ public class RegisterController {
 
     @GetMapping
     public String getRegisterPage(@RequestParam(required = false) String error,
+                                  @RequestParam(required = false) String success,
                                    Model model) {
         if(error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
             model.addAttribute("errorMessage", error);
+        }
+       if(success != null && !success.isEmpty()) {
+            model.addAttribute("Success", true);
+            model.addAttribute("successMessage", success);
         }
         model.addAttribute("bodyContent", "register");
         return "master-template";
@@ -41,8 +46,8 @@ public class RegisterController {
                            @RequestParam Role role) {
         try{
             this.userService.register(username,email, password, repeatedPassword,role);
-            //return "redirect:/login?success=AccountSuccessfullyCreated";
-            return "redirect:/login";
+            return "redirect:/login?success=AccountSuccessfullyCreated";
+            //return "redirect:/login";
         }
         catch (InvalidCredentialsException exception) {
             return "redirect:/register?error=" + exception.getMessage();

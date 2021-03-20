@@ -9,7 +9,7 @@
                     aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <th:block th:if="${feedSearchFlag}">
+            <!--<th:block th:if="${feedSearchFlag}">
                 <form method="post" action="/feed/search" class="form-inline my-2 my-lg-0 entitySearch">
                     <div class="input-group input-group-sm">
                         <input type="text" class="form-control" aria-label="Small"
@@ -20,7 +20,7 @@
                         </div>
                     </div>
                 </form>
-            </th:block>
+            </th:block>-->
             <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
                 <ul class="navbar-nav m-auto nmlist">
                     <th:block th:if="${username != null}">
@@ -33,23 +33,32 @@
                     </th:block>
                     <th:block sec:authorize="isAuthenticated()">
                         <li class="nav-item">
-                            <form action="/profile" method="get">
+                            <form action="/" method="get">
                                 <button type="submit" class="btn btn-success"><i class="fa fa-user"></i>
                                     View profile
                                 </button>
                             </form>
                         </li>
                     </th:block>
+
+                        <li class="nav-item">
+                            <form action="/home" method="get">
+                                <button type="submit" class="btn btn-success"><i class="fa fa-user"></i>
+                                   Home page
+                                </button>
+                            </form>
+                        </li>
+
                     <th:block sec:authorize="isAuthenticated()">
                         <li class="nav-item">
-                            <form action="/profiles" method="get">
+                            <form action="/manage-companies" method="get">
                                 <button type="submit" class="btn btn-primary"><i class="fa fa-users"></i>
-                                    People/Companies
+                                   Companies
                                 </button>
                             </form>
                         </li>
                     </th:block>
-                    <th:block sec:authorize="isAuthenticated()" th:if="${isPerson}">
+                    <th:block sec:authorize="hasRole('ROLE_USER')" >
                         <li class="nav-item">
                             <form action="/results" method="get">
                                 <button type="submit" class="btn btn-light"><i class="fa fa-file"></i>
@@ -58,13 +67,7 @@
                             </form>
                         </li>
                     </th:block>
-                    <li class="nav-item">
-                        <form action="/feed" method="get">
-                            <button type="submit" class="btn btn-warning"><i class="fa fa-coffee"></i>
-                                Browse ads
-                            </button>
-                        </form>
-                    </li>
+
                     <th:block sec:authorize="!isAuthenticated()">
                         <li class="nav-item">
                             <form action="/login" method="get">
