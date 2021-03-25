@@ -10,7 +10,7 @@ public interface UserService extends UserDetailsService {
     User register(String username,String email, String password, String repeatPassword, Role role);
 
     Optional<User> findByUsername(String username);
-    User getUserInstanceByUUID(Long uuid);
+
     User getUsername(String username);
 
 

@@ -7,16 +7,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import wp.com.demo.model.Company;
-import wp.com.demo.model.User;
+import wp.com.demo.model.Employee;
 import wp.com.demo.repository.CompanyRepository;
 import wp.com.demo.service.CompanyService;
+import wp.com.demo.service.EmployeeService;
 import wp.com.demo.service.UserService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/manage-companies")
@@ -29,11 +30,13 @@ public class CompanyListController {
     private final CompanyRepository companyRepository;
     private final CompanyService companyService;
     private final UserService userService;
+    private final EmployeeService employeeService;
 
-    public CompanyListController(CompanyRepository companyRepository, CompanyService companyService, UserService userService) {
+    public CompanyListController(CompanyRepository companyRepository, CompanyService companyService, UserService userService, EmployeeService employeeService) {
         this.companyRepository = companyRepository;
         this.companyService = companyService;
         this.userService = userService;
+        this.employeeService = employeeService;
     }
 
 
@@ -49,7 +52,13 @@ public class CompanyListController {
     // TODO : Should delete the company and its employees with their data
     @DeleteMapping("/delete/{id}")
     public String deleteCompany(@PathVariable Long id) {
+        Company company=this.companyService.findById(id).get();
+    List<Employee> employees=this.employeeService.listByCompanyId(company);
         this.companyService.deleteById(id);
+//        this.employeeService.deleteEmployeesByCompany(employees);
+//        this.employeeService.listByCompanyId(company).removeAll(Collections.emptyList());
+
+        this.companyService.listEmployeesInCompany(id).removeAll(Collections.emptyList());
         return "redirect:/manage-companies";
     }
 
@@ -74,9 +83,9 @@ public class CompanyListController {
             @RequestParam("image") MultipartFile profilePicture
     ) throws IOException {
         String username=request.getRemoteUser();
-        User user= (User) authentication.getPrincipal();
 
-//         User user= this.userService.getUsername(username);
+
+
         if (!profilePicture.isEmpty()) {
             File picture_target = new File(profilePicture.getOriginalFilename());
 //                    (targetFolderImagePPPath + request.getRemoteUser() + "." + profilePicture.getOriginalFilename().split("\\.")[1]);
@@ -85,7 +94,7 @@ public class CompanyListController {
 
             }
             profilePicture.transferTo(picture_target);
-            this.companyService.save(user,name, description, moto, owner, profilePicture, "../ProfilePictures/" + picture_target.getName(), numEmployee, numInterns);
+            this.companyService.save(username,name, description, moto, owner, profilePicture, "../ProfilePictures/" + picture_target.getName(), numEmployee, numInterns);
 
         }
 
@@ -93,7 +102,7 @@ public class CompanyListController {
             this.companyService.edit(id,name,description, moto,owner,numEmployee,numInterns);
         }*/
         else {
-            this.companyService.save(user,name, description, moto, owner, profilePicture, "../ProfilePictures/", numEmployee, numInterns);
+            this.companyService.save(username,name, description, moto, owner, profilePicture, "../ProfilePictures/", numEmployee, numInterns);
 
 
         }

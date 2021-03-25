@@ -4,20 +4,21 @@
 
 <!--    th:object="${company}"-->
 
-    <form th:action="@{'/employee-profile/add/{id}'(id=${company.getId()})}"  method="POST"  enctype="multipart/form-data">
-<!--       <input id="id" type="hidden" name="id" th:value="(${employee} != null ? ${employee.getId()} : '')">-->
-        <div class="form-group row">
-            <label class="col-lg-3 col-form-label form-control-label">First name</label>
-            <div class="col-lg-9">
-                <input class="form-control" type="text"
-                       id="name"
-                       name="name"
-                       placeholder="Enter product name">
+    <form th:action="@{'/employees/add/{id}'(id=${company.getId()})}" th:object="${company}" method="POST"  enctype="multipart/form-data">
 
-                <!--                       th:value="(${employee} != null ? ${employee.getName()} : '')"-->
+<!--        <form action="/employees/add" method="POST"  enctype="multipart/form-data">-->
 
+<!--            <input id="id" type="hidden" name="id" th:value="(${employee} != null ? ${employee.getId()} : '')">-->
+                  <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">First name</label>
+                        <div class="col-lg-9">
+                            <input class="form-control" type="text"
+                                   id="name"
+                                   name="name"
+                                   placeholder="Enter product name">
+<!--                                   th:value="(${employee} != null ? ${employee.getName()} : '')"-->
 
-            </div>
+                        </div>
         </div>
         <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label">Last name</label>
@@ -25,9 +26,10 @@
                 <input class="form-control" type="text"
                        id="surname"
                        name="surname"
-                       th:value="(${employee} != null ? ${employee.getSurname()} : '')"
-
                        placeholder="Enter employee NAME name">
+<!--                       th:value="(${employee} != null ? ${employee.getSurname()} : '')"-->
+
+
             </div>
         </div>
         <div class="form-group row">
@@ -36,10 +38,10 @@
             <div class="col-lg-9">
                 <input class="form-control" type="text"
                        id="phone"
-                       name="phone"
-                       th:value="(${employee} != null ? ${employee.getPhone()} : '')"
+                       name="phone" placeholder="Enter product name">
+<!--                       th:value="(${employee} != null ? ${employee.getPhone()} : '')"-->
 
-                       placeholder="Enter product name">
+
             </div>
         </div>
         <div class="form-group row">
@@ -47,10 +49,10 @@
             <div class="col-lg-9">
                 <input class="form-control" type="text"
                        id="email"
-                       name="email"
-                       th:value="(${employee} != null ? ${employee.getEmail()} : '')"
+                       name="email"  placeholder="Enter product name">
+<!--                       th:value="(${employee} != null ? ${employee.getEmail()} : '')"-->
 
-                       placeholder="Enter product name">
+
             </div>
         </div>
         <div class="form-group row">
@@ -65,10 +67,10 @@
             <div class="col-lg-9">
                 <input class="form-control" type="text"
                        id="job"
-                       name="jobTitle"
-                       th:value="(${employee} != null ? ${employee.getJobTitle()} : '')"
+                       name="jobTitle" placeholder="Enter product name">
+<!--                       th:value="(${employee} != null ? ${employee.getJobTitle()} : '')"-->
 
-                       placeholder="Enter product name">
+
             </div>
         </div>
         <div class="form-group row">
@@ -76,10 +78,10 @@
             <div class="col-lg-9">
                 <input class="form-control" type="text"
                        id="street"
-                       name="street"
-                       th:value="(${employee} != null ? ${employee.getStreet()} : '')"
+                       name="street" src="placeholder="Enter product name">"
+<!--                       th:value="(${employee} != null ? ${employee.getStreet()} : '')"-->
 
-                       placeholder="Enter product name">
+
             </div>
 
 
@@ -87,18 +89,18 @@
             <div class="col-lg-6">
                 <input class="form-control" type="text"
                        id="city"
-                       name="city"
-                       th:value="(${employee} != null ? ${employee.getCity()} : '')"
+                       name="city" placeholder="Enter product name">
+<!--                       th:value="(${employee} != null ? ${employee.getCity()} : '')"-->
 
-                       placeholder="Enter product name">
+<!--                       placeholder="Enter product name">-->
             </div>
             <div class="col-lg-3">
                 <input class="form-control" type="text"
                        id="country"
-                       name="country"
-                       th:value="(${employee} != null ? ${employee.getCountry()} : '')"
+                       name="country" placeholder="Enter product name">
+<!--                       th:value="(${employee} != null ? ${employee.getCountry()} : '')"-->
 
-                       placeholder="Enter product name">
+<!--                       placeholder="Enter product name">-->
             </div>
         </div>
         <div class="form-group row">
@@ -106,10 +108,10 @@
             <div class="col-lg-9">
                 <input class="form-control" type="text"
                        id="department"
-                       name="department"
-                       th:value="(${employee} != null ? ${employee.getDepartment()} : '')"
+                       name="department" placeholder="Enter product name">
+<!--                       th:value="(${employee} != null ? ${employee.getDepartment()} : '')"-->
 
-                       placeholder="Enter product name">
+<!--                       placeholder="Enter product name">-->
             </div>
         </div>
 
@@ -120,7 +122,8 @@
 
                        id="date"
                        name="employmentDate"
-                       th:datetime="(${employee} != null ? ${employee.getEmploymentDate()} : '')">
+                       >
+<!--                       th:datetime="(${employee} != null ? ${employee.getEmploymentDate()} : '')">-->
 <!--                       th:value="(${employee} != null ? ${employee.getEmploymentDate()} : '')">-->
 
                 <!--pattern="yyyy-MM-dd"-->
@@ -131,10 +134,10 @@
             <div class="col-lg-9">
                 <input class="form-control" type="text"
                        id="salary"
-                       name="salary"
-                       th:value="(${employee} != null ? ${employee.getSalary()} : '')"
+                       name="salary" placeholder="Enter product name">
+<!--                       th:value="(${employee} != null ? ${employee.getSalary()} : '')"-->
 
-                       placeholder="Enter product name">
+<!--                       placeholder="Enter product name">-->
             </div>
         </div>
         <div class="form-group row">
@@ -142,10 +145,10 @@
             <div class="col-lg-9">
                 <input class="form-control" type="text"
                        id="experience"
-                       name="experience"
-                       th:value="(${employee} != null ? ${employee.getExperience()} : '')"
+                       name="experience" placeholder="Enter product name">
+<!--                       th:value="(${employee} != null ? ${employee.getExperience()} : '')"-->
 
-                       placeholder="Enter product name">
+<!--                       placeholder="Enter product name">-->
             </div>
         </div>
         <div class="form-group row">
@@ -153,10 +156,10 @@
             <div class="col-lg-9">
                 <input class="form-control" type="text"
                        id="embg"
-                       name="embg"
-                       th:value="(${employee} != null ? ${employee.getEmbg()} : '')"
+                       name="embg" placeholder="Enter product name">
+<!--                       th:value="(${employee} != null ? ${employee.getEmbg()} : '')"-->
 
-                       placeholder="Enter product name">
+<!--                       placeholder="Enter product name">-->
             </div>
         </div>
         <div class="form-group row">
@@ -164,10 +167,10 @@
             <div class="col-lg-9">
                 <input class="form-control" type="text"
                        id="projects"
-                       name="projects"
-                       th:value="(${employee} != null ? ${employee.getProjects()} : '')"
+                       name="projects" placeholder="Enter product name">
+<!--                       th:value="(${employee} != null ? ${employee.getProjects()} : '')"-->
 
-                       placeholder="Enter product name">
+<!--                       placeholder="Enter product name">-->
             </div>
         </div>
 
@@ -189,10 +192,10 @@
                 </select>-->
                 <input class="form-control" type="text"
                        id="status"
-                       name="status"
-                       th:value="(${employee} != null ? ${employee.getStatus()} : '')"
+                       name="status" placeholder="Enter product name">
+<!--                       th:value="(${employee} != null ? ${employee.getStatus()} : '')"-->
 
-                       placeholder="Enter product name">
+<!--                       placeholder="Enter product name">-->
             </div>
         </div>
         <!--<div class="form-group row">

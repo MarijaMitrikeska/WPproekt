@@ -27,7 +27,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/home", "/assets/**", "/register", "/login","/about-us").permitAll()
-                .antMatchers("/css/**", "/fonts/**", "/images/**", "/js/**", "/vendor/**").permitAll()
+                .antMatchers("/css/**", "/fonts/**", "/images/**", "/js/**", "/vendor/**","/assets/**","/syntax-highlighter/**").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
@@ -39,10 +39,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?success=You have successfully logged out ")
                 .clearAuthentication(true)
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
-                .logoutSuccessUrl("/home")
+//                .logoutSuccessUrl("/home")
                 .and()
                 .exceptionHandling().accessDeniedPage("/home");
 

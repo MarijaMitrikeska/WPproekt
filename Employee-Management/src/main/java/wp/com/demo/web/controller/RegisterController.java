@@ -49,7 +49,7 @@ public class RegisterController {
             return "redirect:/login?success=AccountSuccessfullyCreated";
             //return "redirect:/login";
         }
-        catch (InvalidCredentialsException exception) {
+        catch (Exception exception) {
             return "redirect:/register?error=" + exception.getMessage();
         }
 

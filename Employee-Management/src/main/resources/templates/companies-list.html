@@ -1,16 +1,16 @@
 <section xmlns:th="http://www.thymeleaf.org">
     <!-- ? Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/loder.gif" alt="">
-                    <!--<img src="../images/logo-spin.gif" alt="">-->
-                </div>
-            </div>
-        </div>
-    </div>
+<!--    <div id="preloader-active">-->
+<!--        <div class="preloader d-flex align-items-center justify-content-center">-->
+<!--            <div class="preloader-inner position-relative">-->
+<!--                <div class="preloader-circle"></div>-->
+<!--                <div class="preloader-img pere-text">-->
+<!--                    <img src="assets/img/logo/loder.gif" alt="">-->
+<!--                    &lt;!&ndash;<img src="../images/logo-spin.gif" alt="">&ndash;&gt;-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <!-- Company area start -->
         <div class="courses-area section-padding40 fix">
@@ -142,38 +142,30 @@ Life-changing travel must also be sustainable travel. By bringing together a gro
                         <div class="properties properties2 mb-30 company" >
                             <div class="properties__card">
                                 <div class="properties__img overlay1">
-<!--                                    <a href="#"><img src="../images/Magna.png" alt=""></a>-->
-                                    <img th:src="${company.getImageSource()}" alt="">
+
+                                    <img th:src="${company.getImageSource()}" alt="image" name="image">
                                 </div>
-                                <div class="properties__caption">
+                                <div class="properties__caption align-center">
                                     <h3 th:text="${company.getName()}"></h3>
 
-                                    <!--<p th:text="${company.getDescription()}"></p>-->
+
                                     <h5 th:text="${company.getMoto()}"></h5>
-                                    <!--<p th:text="${company.getOwner()}">
-                                </p>
-                                    <p th:text="${company.getEmployee_num()}">
-                                    </p>
-                                    <p th:text="${company.getIntern_num()}">
-                                    </p>-->
 
-                                   <!-- <a href="/company-profile" class="border-btn border-btn2">Read more</a>-->
-<!--                                    <th:block  th:if="${company.getUser()==#request.getRemoteUser()}">-->
-                                   <a th:href="@{'/company-profile/{id}' (id=${company.getId()})}" class="btn btn-sm btn-info company-description">
-<!--                                        <a href="/company-profile"-->
+                                   <a th:href="@{'/company-profile/{id}' (id=${company.getId()})}" class="btn btn-lg btn-info add company-description">
 
-                                        <i class="fa fa-trash">Read More</i>
+
+                                        Read More
                                     </a>
-<!--                                    </th:block>-->
 
 
-<!--                                    <th:block sec:authorize="hasRole('ROLE_ADMIN')">-->
+
+                                 <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                                         <form th:action="@{'/manage-companies/delete/{id}' (id=${company.getId()})}" th:method="DELETE">
                                             <button type="submit" class="btn-danger btn btn-dark delete-company">
                                                 <i class="fa fa-trash">Delete</i>
                                             </button>
                                         </form>
-<!--                                    </th:block>-->
+                                    </th:block>
 
                                 </div>
                             </div>
@@ -216,7 +208,7 @@ Life-changing travel must also be sustainable travel. By bringing together a gro
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-8">
                         <div class="section-tittle text-center mt-40">
-                            <a href="/manage-companies/add-company" class="border-btn">Add new company</a>
+                            <a href="/manage-companies/add-company"  class="border-btn  add">Add new company</a>
                         </div>
                     </div>
                 </div>

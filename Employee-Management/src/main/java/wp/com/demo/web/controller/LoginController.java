@@ -32,10 +32,7 @@ public class LoginController {
     public String getLoginPage(@RequestParam(required = false) String error,
                                @RequestParam(required = false) String success
                     ,Model model){
-        /*if(request.getRemoteUser() != null)  {
 
-            model.addAttribute("username",request.getRemoteUser() );
-        }*/
         if(error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
             model.addAttribute("errorMessage", error);

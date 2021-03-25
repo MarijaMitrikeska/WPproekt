@@ -13,8 +13,8 @@
                     <th:block th:if="${hasError}">
                         <div class="flex-sb-m w-full p-b-30">
                             <div>
-                                <label class="txt1 text-danger">
-                                    Incorrect username and password combination.
+                                <label class="txt1 text-danger" th:text="${errorMessage}">
+
                                 </label>
                             </div>
                         </div>
@@ -22,8 +22,8 @@
                     <th:block th:if="${Success}">
                         <div class="flex-sb-m w-full p-b-30">
                             <div>
-                                <label class="txt1 text-danger">
-                                    Account successfully created.
+                                <label class="txt1 text-danger" th:text="${successMessage}" style="color: green ">
+
                                 </label>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
 
                     <div class="container-login100-form-btn" style="color: #4674b8; padding-top: 10px">
                         <button class="login100-form-btn">
-                            <a href="/register" style="color: white";>Register here</a>
+                            <a href="/register" style="color: white;font-size: 16px ">Register here</a>
 
                         </button>
                     </div>

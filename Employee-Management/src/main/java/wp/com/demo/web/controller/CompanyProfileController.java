@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import wp.com.demo.model.Company;
+import wp.com.demo.model.Employee;
 import wp.com.demo.model.User;
 import wp.com.demo.repository.CompanyRepository;
 import wp.com.demo.service.CompanyService;
@@ -15,6 +16,8 @@ import wp.com.demo.service.UserService;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping("/company-profile")
@@ -33,22 +36,18 @@ public class CompanyProfileController {
     }
 
     //TODO: redirect errori da sredam
-//    @GetMapping("/{id}")
+
     @GetMapping("/{id}")
     public String getCompanyPage(@PathVariable Long id, HttpServletRequest request, Model model, Authentication authentication) {
         if (this.companyService.findById(id).isPresent()) {
             Company company = this.companyService.findById(id).get();
 
-            User user= (User) authentication.getPrincipal();
+//
             if (request.getRemoteUser() != null) {
 
 
                 String username=request.getRemoteUser();
-//                User user=  this.userService.getUsername(username);
-
 //
-//            String companyUser=this.companyService.findById(id).get().getUser().getUsername();
-//                String companyUser=;
                 model.addAttribute("username", request.getRemoteUser());
 //                model.addAttribute("companyUser",this.companyService.getCompany(user).toString() );
                 model.addAttribute("company", company);
@@ -56,23 +55,7 @@ public class CompanyProfileController {
                 return "master-template";
             }
 
-//        if (this.companyService.findById(id).isPresent()) {
-//            Company company = this.companyService.findById(id).get();
-//            String companyUser=company.getUser().getUsername();
-//            String username=request.getRemoteUser();
-//            model.addAttribute("companyUser",companyUser);
-//            model.addAttribute("username",username);
-//            model.addAttribute("company", company);
-//
-//        }
 
-//        if (this.companyService.findById(id).isPresent()) {
-//            String username = request.getRemoteUser();
-//            if (this.companyService.getCompany(username).isPresent())
-//                model.addAttribute("company", company);
-//            model.addAttribute("bodyContent", "companyProfile");
-//            return "master-template";
-//        }
             else {
 //                Company company = this.companyService.findById(id).get();
                 model.addAttribute("company", company);
@@ -81,17 +64,11 @@ public class CompanyProfileController {
 
             }
         }
-//        return "master-template";
+
         return "master-template";
 
 
-//            if (company.getUser().getUsername().equals(request.getRemoteUser())) {
-//                String username = request.getRemoteUser();
-//                company = this.companyService.getCompany(username).orElseThrow(() -> new UsernameNotFoundException(username));
-//                model.addAttribute("company", company);
-//                model.addAttribute("bodyContent", "companyProfile");
-//
-//            }
+
 
 
 
@@ -100,26 +77,7 @@ public class CompanyProfileController {
     }
 
 
-//
 
-
-//
-//        User user = this.userService.getUserInstanceByUUID(request.getRemoteUser());
-
-//        model.addAttribute("username",user.getUsername());
-//        model.addAttribute("companyId",((Company)user).getId());
-
-
-
-//        }
-//        return "redirect/:company?error=CompanyNotFound";
-
-
-            //return "courses";
-
-
-//    model.addAttribute("companyAds", this.adService.getAdsByCompanyId(((Company) user).getId()));
-// za lsitanje na vraboteni spored kompanija}
 
         @GetMapping("/edit/{id}")
         public String editCompanyProfilePage (@PathVariable Long id, Model model){
@@ -145,9 +103,10 @@ public class CompanyProfileController {
                 @RequestParam Integer numInterns,
                 @RequestParam("image") MultipartFile profilePicture) throws IOException {
 //
-            String username=request.getRemoteUser();
+            String user=request.getRemoteUser();
 
-          User user=  this.userService.getUsername(username);
+
+
             if (!profilePicture.isEmpty()) {
                 File picture_target = new File(profilePicture.getOriginalFilename());
 //                    (targetFolderImagePPPath + request.getRemoteUser() + "." + profilePicture.getOriginalFilename().split("\\.")[1]);
@@ -159,7 +118,7 @@ public class CompanyProfileController {
                     profilePicture.transferTo(picture_target);
                     this.companyService.edit(user,id, name, description, moto, owner, profilePicture, "../ProfilePictures/" + picture_target.getName(), numEmployee, numInterns);
 
-//                return "redirect:/manage-companies";
+//
                 }
             } else {
 

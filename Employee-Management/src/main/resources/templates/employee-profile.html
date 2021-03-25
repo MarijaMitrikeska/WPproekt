@@ -1,4 +1,4 @@
-<section xmlns:th="http://www.thymeleaf.org">
+<section xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <div class="container">
 <div class="row">
         <div class="col-lg-4">
@@ -8,8 +8,9 @@
                <div class="user-box">
                 <img th:src="${employee.getImageSource()}" alt="personImage">
               </div>
-              <h5 class="mb-1 text-white" ></h5>
-              <h6 class="text-light"  > </h6>
+<!--              <h5 class="mb-1 text-white"  ></h5>-->
+              <h6 class="text-light" th:text="${employee.getName()} + ${employee.getSurname}" > </h6>
+
              </div>
               <div class="card-body">
                 <ul class="list-group shadow-none">
@@ -52,7 +53,7 @@
                     </div>
                     <div class="col p-2">
                      <h4 class="mb-1 line-height-5" th:text="${employee.getSalary()}"  ></h4>
-                     <small class="mb-0 font-weight-bold" ></small>
+                     <small class="mb-0 font-weight-bold" >Salary</small>
                     </div>
                  </div>
                </div>
@@ -84,50 +85,61 @@
                     <!--<h5 class="mb-3">User Profile</h5>--><!-- name of the employee-->
                     <div class="row">
                         <div class="col-md-6">
-                            <h6>Department</h6>
-                            <p th:text="${employee.getDepartment()}">
+                            <div>
+                                <h6>Department</h6>
+                                <p th:text="${employee.getDepartment()}">
 
-                            </p>
-                            <h6>Employment date</h6>
-                            <p th:datetime="${employee.getEmploymentDate()}">
+                                </p>
+                            </div>
+                            <div>
+                                <h6>Employment date</h6>
+                                <p th:datetime="${employee.getEmploymentDate()}">
 
-                            </p>
-                            <h6>Recommendations</h6>
-                            <p>
-                               Netta, Web
-                            </p>
-                            <h6>Address</h6>
-                            <p th:text="${employee.getStreet()}">
+                                </p>
+                            </div>
+                           <div>
+                               <h6>Address</h6>
+                               <p th:text="${employee.getStreet()} + ${employee.getCity()} + ${employee.getCountry()}">
 
-                            </p>
+                               </p>
+                           </div>
 
-                            <h6>Status</h6>
-                            <p th:text="${employee.getStatus()}">
-                                Active
-                            </p>
+<!--                            <h6>Recommendations</h6>-->
+<!--                            <p>-->
+<!--                               Netta, Web-->
+<!--                            </p>-->
+                          <div>
+                              <h6>Status</h6>
+                              <p th:text="${employee.getStatus()}">
+
+                              </p>
+                          </div>
+
+
+
 
 
 
                         </div>
-                        <div class="col-md-6">
-                            <h6>Recent badges</h6>
-                            <a href="javascript:void();" class="badge badge-dark badge-pill">html5</a>
-                            <a href="javascript:void();" class="badge badge-dark badge-pill">react</a>
-                            <a href="javascript:void();" class="badge badge-dark badge-pill">codeply</a>
-                            <a href="javascript:void();" class="badge badge-dark badge-pill">angularjs</a>
-                            <a href="javascript:void();" class="badge badge-dark badge-pill">css3</a>
-                            <a href="javascript:void();" class="badge badge-dark badge-pill">jquery</a>
-                            <a href="javascript:void();" class="badge badge-dark badge-pill">bootstrap</a>
-                            <a href="javascript:void();" class="badge badge-dark badge-pill">responsive-design</a>
-                            <hr>
-                            <h6>Hobbies</h6>
-                            <p>
-                                Indie music, skiing and hiking. I love the great outdoors.
-                            </p>
-                            <!--<span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
-                            <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
-                            <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>-->
-                        </div>
+<!--                        <div class="col-md-6">-->
+<!--                            <h6>Recent badges</h6>-->
+<!--                            <a href="javascript:void();" class="badge badge-dark badge-pill">html5</a>-->
+<!--                            <a href="javascript:void();" class="badge badge-dark badge-pill">react</a>-->
+<!--                            <a href="javascript:void();" class="badge badge-dark badge-pill">codeply</a>-->
+<!--                            <a href="javascript:void();" class="badge badge-dark badge-pill">angularjs</a>-->
+<!--                            <a href="javascript:void();" class="badge badge-dark badge-pill">css3</a>-->
+<!--                            <a href="javascript:void();" class="badge badge-dark badge-pill">jquery</a>-->
+<!--                            <a href="javascript:void();" class="badge badge-dark badge-pill">bootstrap</a>-->
+<!--                            <a href="javascript:void();" class="badge badge-dark badge-pill">responsive-design</a>-->
+<!--                            <hr>-->
+<!--                            <h6>Hobbies</h6>-->
+<!--                            <p>-->
+<!--                                Indie music, skiing and hiking. I love the great outdoors.-->
+<!--                            </p>-->
+<!--                            &lt;!&ndash;<span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>-->
+<!--                            <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>-->
+<!--                            <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>&ndash;&gt;-->
+<!--                        </div>-->
                         <div class="row gutters-sm">
                         <div class="col-sm-6 mb-3">
                             <div class="card h-100">
@@ -186,38 +198,7 @@
                             </div>
                         </div>
                     </div>
-                        <!--<div class="col-md-12">
-                            <h5 class="mt-2 mb-3"><span class="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h5>
-                            <table class="table table-hover table-striped">
-                                <tbody>                                    
-                                    <tr>
-                                        <td>
-                                            <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>-->
+
                     </div>
                     <!--/row-->
                 </div>
@@ -263,11 +244,12 @@
                 </div>-->
                <!-- <th:block sec:authorize="hasRole('ROLE_USER')">-->
                    <!-- <a th:href="@{'/employee-profile/edit/{id}'} (id=${employee.getId()})">-->
-                        <div class="tab-pane" id="edit">
+                        <div class="tab-pane" id="edit" >
 
                             <form th:action="@{'/employee-profile/add/{id}'(id=${employee.getId()})}" method="POST"  enctype="multipart/form-data">
-<!--                                <input id="id" type="hidden" name="id" th:value="(${employee} != null ? ${employee.getId()} : '')">-->
 
+<!--                            <form action="/employee-profile/add" method="POST" th:object="${employee}" enctype="multipart/form-data">-->
+                                <input id="id" type="hidden" name="id" th:value="(${employee} != null ? ${employee.getId()} : '')">
                                     <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">First name</label>
                             <div class="col-lg-9">
@@ -299,14 +281,15 @@
                             <label class="col-lg-3 col-form-label form-control-label">Email</label>
                             <div class="col-lg-9">
                                 <input class="form-control" type="email" th:value="(${employee} != null ? ${employee.getEmail()} : '')"
-                                       placeholder="Enter company name">
+                                       placeholder="Enter company name"
+                                name="email">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Change profile</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="file" name="personImage"  accept="image/png, image/jpeg"
-                                       th:src="(${employee} != null ? ${employee.getImageSource()} : '')">
+                                <input class="form-control" type="file"   accept="image/png, image/jpeg"
+                                       name="personImage" th:src="(${employee} != null ? ${employee.getImageSource()} : '')">
 
                             </div>
                         </div>
@@ -314,32 +297,38 @@
                             <label class="col-lg-3 col-form-label form-control-label">Job Title</label>
                             <div class="col-lg-9">
                                 <input class="form-control" th:value="(${employee} != null ? ${employee.getJobTitle()} : '')"
-                                       placeholder="Enter company name">
+                                       name="jobTitle" placeholder="Enter company name">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Address</label>
                             <div class="col-lg-9">
                                 <input class="form-control" type="text" th:value="(${employee} != null ? ${employee.getStreet()} : '')"
-                                       placeholder="Enter company name">
+                                       name="street" placeholder="Enter company name">
                             </div>
+
 
 
                             <label class="col-lg-3 col-form-label form-control-label"></label>
                             <div class="col-lg-6">
                                 <input class="form-control" type="text" th:value="(${employee} != null ? ${employee.getCity()} : '')"
-                                       placeholder="Enter company name">
+                                       placeholder="Enter company name"
+                                       name="city">
                             </div>
+
+                            <label class="col-lg-3 col-form-label form-control-label"></label>
                             <div class="col-lg-3">
                                 <input class="form-control" type="text" th:value="(${employee} != null ? ${employee.getCountry()} : '')"
-                                       placeholder="Enter company name">
+                                       placeholder="Enter company name"
+                                       name="country">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Department</label>
                             <div class="col-lg-9">
                                 <input class="form-control" type="text" th:value="(${employee} != null ? ${employee.getDepartment()} : '')"
-                                       placeholder="Enter company name">
+                                       placeholder="Enter company name"
+                                       name="department">
                             </div>
                         </div>
 
@@ -355,13 +344,14 @@
                             </div>
                         </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-3 col-form-label form-control-label">Employment Date</label>
+                                    <label class="col-lg-3 col-form-label form-control-label">Embg</label>
                                     <div class="col-lg-9">
                                         <input class="form-control" type="text"
 
                                                id="embg"
                                                name="embg"
-                                               th:datetime="(${employee} != null ? ${employee.getEmbg()} : '')">
+                                               th:value="(${employee} != null ? ${employee.getEmbg()} : '')"
+                                               placeholder="Enter product name">
 
                                     </div>
                                 </div>
@@ -370,7 +360,8 @@
                             <label class="col-lg-3 col-form-label form-control-label">Status</label>
                             <div class="col-lg-9">
                                 <input class="form-control" type="text" th:value="(${employee} != null ? ${employee.getStatus()} : '')"
-                                       placeholder="Enter company name">
+                                       placeholder="Enter company name"
+                                name="status">
 
                                 <!--                                <select>-->
 <!--                                    <option>-->
@@ -387,6 +378,40 @@
 <!--                                </select>-->
                             </div>
                         </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Salary</label>
+                                    <div class="col-lg-9">
+                                        <input class="form-control" type="text"
+                                               id="salary"
+                                               name="salary"
+                                               th:value="(${employee} != null ? ${employee.getSalary()} : '')"
+
+                                               placeholder="Enter product name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Experience</label>
+                                    <div class="col-lg-9">
+                                        <input class="form-control" type="text"
+                                               id="experience"
+                                               name="experience"
+                                               th:value="(${employee} != null ? ${employee.getExperience()} : '')"
+
+                                               placeholder="Enter product name">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-3 col-form-label form-control-label">Projects</label>
+                                    <div class="col-lg-9">
+                                        <input class="form-control" type="text"
+                                               id="projects"
+                                               name="projects"
+                                               th:value="(${employee} != null ? ${employee.getProjects()} : '')"
+
+                                               placeholder="Enter product name">
+                                    </div>
+                                </div>
+
                         <!--<div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Hobbies</label>
                             <div class="col-lg-9">

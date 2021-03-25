@@ -2,6 +2,7 @@ package wp.com.demo.model;
 
 
 import lombok.Data;
+import org.hibernate.annotations.ManyToAny;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import wp.com.demo.model.enums.Role;
@@ -21,8 +22,7 @@ public class User implements UserDetails {
 
     private String email;
     private String password;
-//TODO: site exc sho fala
-    //TODO:username veke postoi, password ne odgovara, mejl veke postoi
+
 
     private boolean isAccountNonExpired = true;
     private boolean isAccountNonLocked = true;
@@ -31,8 +31,9 @@ public class User implements UserDetails {
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
-    @OneToOne(mappedBy = "user")
-    private Company company;
+
+//    @OneToOne(mappedBy = "user")
+//    private Company company;
 
 
 

@@ -21,12 +21,11 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
-    private final CompanyRepository companyRepository;
 
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, CompanyRepository companyRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.companyRepository = companyRepository;
+
     }
 
     @Override
@@ -51,17 +50,11 @@ public class UserServiceImpl implements UserService {
         return this.userRepository.findByUsername(username);
     }
 
-    @Override
-    public User getUserInstanceByUUID(Long uuid) {
-//        Optional<User> user = this.userRepository.findByUsername(uuid);
-//        return user.isPresent() ? user.get() : this.userRepository.findById(uuid).get();
-//
-        return null;
-    }
+
 
     @Override
     public User getUsername(String username) {
-//        Optional<User> user=this.userRepository.findByUsername(username);
+
 
         return this.userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username));
     }

@@ -30,8 +30,7 @@ public class Employee {
     private String jobTitle;
     private String department;
 
-//    @Temporal(TemporalType.DATE)
-//    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+
     private LocalDate employmentDate;
     private String status;
     private String phone;
@@ -40,11 +39,14 @@ public class Employee {
     private Integer experience;
     private String imageSource;
 
+    @ManyToOne
+    private Company companyId;
+
 
     public Employee() {
     }
 
-    public Employee( String name, String surname,String imageSource, String embg, String email, String street, String city, String country, String jobTitle, String department, LocalDate employmentDate, String status, String phone, Integer projects, Integer salary, Integer experience) {
+    public Employee( Company companyId,String name, String surname,String imageSource, String embg, String email, String street, String city, String country, String jobTitle, String department, LocalDate employmentDate, String status, String phone, Integer projects, Integer salary, Integer experience) {
 
         this.name = name;
         this.surname = surname;
@@ -55,6 +57,7 @@ public class Employee {
         this.country = country;
         this.jobTitle = jobTitle;
         this.department = department;
+        this.companyId=companyId;
 
 
         this.employmentDate = employmentDate;

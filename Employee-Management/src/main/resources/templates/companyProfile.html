@@ -8,42 +8,72 @@
                         <div class="col-md-5 text-center">
                             <img class="img-thumbnail md-margin-bottom-10"  th:src="${company.getImageSource()}" alt="">
                         </div>
-                        <div class="col-md-7">
-                            <span><strong>Company name</strong></span><h2 th:text="${company.getName()}" ></h2>
-                            <h6 Moto></h6>  <h5 th:text="${company.getMoto()}"></h5>
-                            <h6 Description></h6>  <h5 th:text="${company.getDescription()}"></h5>
+                        <div class="col-md-7 text-center">
+                            <div class="">
+<!--                                <strong>Company name</strong>-->
+                                <h2 th:text="${company.getName()}" ></h2>
+                            </div>
+                            <div>
+                                <h3 th:text="${company.getMoto()}"></h3>
+                            </div>
+                            <div>
+                                <h3 th:text="${company.getDescription()}"></h3>
+                            </div>
+                            <div>
+                                <h3 th:text="${company.getOwner()}"></h3>
+                            </div>
+
+
+<!--                            <h6 Moto></h6> -->
+
+<!--                            <h6 Description></h6>  -->
+
                             <hr>
-                            <h5>Information about the company</h5>
-                            <h5>Owner</h5><p th:text="${company.getOwner()}">!</p>
-                            <h5> Number of employees </h5> <p th:text="${company.getEmployee_num()}"></p>
-                            <h5> Number of interns </h5>  <p th:text="${company.getIntern_num()}"></p>
+                            <div>
+                                <h4 th:text="'Employees'+${company.getEmployee_num()}"></h4>
+                            </div>
+                            <div>
+                                <h4 th:text="${company.getIntern_num()}">Interns:</h4>
+                            </div>
+
+<!--                            <h5>Information about the company</h5>-->
+<!--                            <h5>Owner</h5>-->
+
+<!--                            <h5> Number of employees </h5> -->
+
+<!--                            <h5> Number of interns </h5> -->
 
 
-                            <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${company.getUser().getUsername() } == ${username}">
 
-                                <div class="row justify-content-center">
-                                    <div class="col-xl-7 col-lg-8">
-                                        <div class="section-tittle text-center mt-40">
-                                <a th:href="@{'/company-profile/edit/{id}' (id=${company.getId()})}" class="btn btn-sm btn-info company-description">Edit</a>
+                            <th:block sec:authorize="hasRole('ROLE_USER')" th:if="${company.getCompanyUsername() } == ${username}">
 
-                                        </div>
-                                    </div>
-                                </div>
+<!--                                <div class="row justify-content-center">-->
+<!--                                    <div class="col-xl-7 col-lg-8">-->
+                                <div class="row">
+                                        <div class="col-md-12 text-right mt-5">
+                                <a th:href="@{'/company-profile/edit/{id}' (id=${company.getId()})}" class="btn btn-md btn-info company-description float-right">Edit</a>
+
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                </div>-->
 <!--                            </th:block>-->
 <!--                            <th:block sec:authorize="hasRole('ROLE_USER')">-->
-                                <div class="row justify-content-center">
-                                    <div class="col-xl-7 col-lg-8">
-                                        <div class="section-tittle text-center mt-40">
-                                            <a  th:href="@{'/employees/{id}' (id=${company.getId()})}" class="border-btn">See employees</a>
+<!--                                <div class="row justify-content-center">-->
+<!--                                    <div class="col-xl-7 col-lg-8 ml-">-->
+<!--                                        <div class="section-tittle text-center mt-40">-->
+                                            <a  th:href="@{'/employees/{id}' (id=${company.getId()})}" class="btn btn-md float-right ml-3 btn-info">See employees</a>
                                             <!--<a href="/employees" class="border-btn">See employees</a>-->
-                                        </div>
-                                    </div>
+<!--                                        </div>-->
+<!--                                    </div>-->
+                                </div>
                                 </div>
 
                             </th:block>
-
-
                         </div>
+
+
+
+
 
 
 

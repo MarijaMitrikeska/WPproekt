@@ -40,7 +40,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         catch (UsernameNotFoundException exception){
             System.out.println(exception.getMessage());
         }
-        if (userDetails==null)throw new UsernameNotFoundException("User with the given username doesn't exist.");
+        if (userDetails.getUsername()==null)throw new UsernameNotFoundException("User with the given username doesn't exist.");
 
 
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {

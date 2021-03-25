@@ -1,0 +1,10 @@
+input{
+    height: 50px !important;
+
+}
+.add:hover{
+    color: white !important;
+}
+.add{
+    color: #0056b3;
+}

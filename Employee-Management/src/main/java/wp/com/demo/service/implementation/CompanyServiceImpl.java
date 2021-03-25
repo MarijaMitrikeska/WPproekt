@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import wp.com.demo.model.Company;
 import wp.com.demo.model.Employee;
 import wp.com.demo.model.User;
+import wp.com.demo.model.exceptions.EmployeesNotFound;
 import wp.com.demo.repository.CompanyRepository;
 import wp.com.demo.repository.UserRepository;
 import wp.com.demo.service.CompanyService;
@@ -21,31 +22,17 @@ import java.util.stream.Collectors;
 @Service
 public class CompanyServiceImpl  implements CompanyService {
     private final CompanyRepository companyRepository;
-    private final UserRepository userRepository;
-    private final EmployeeService employeeService;
 
-    public CompanyServiceImpl(CompanyRepository companyRepository, UserRepository userRepository, EmployeeService employeeService) {
+
+    public CompanyServiceImpl(CompanyRepository companyRepository) {
         this.companyRepository = companyRepository;
-        this.userRepository = userRepository;
-        this.employeeService = employeeService;
+
     }
 
-//    @Override
-//    public Company addCompany(String name, String description,String moto, String owner,String imageSource, Integer employee, Integer interns) {
-//        /*if (name==null || name.isEmpty()){
-//            throw new IllegalArgumentException();
-//        }
-//        if (this.companyRepository.existsById()){
-//            throw new IllegalArgumentException(); // nov excp CompanyAlreadyExists
-//        }*/
-//        Company company=new Company(name,description,moto,owner,imageSource,employee,interns);
-//        companyRepository.save(company);
-//        return company;
-//
-//    }
+
 
     @Override
-    public Company update(User user,String name, String description, String moto, String owner, MultipartFile profilePicture, String imageSource, Integer employee, Integer interns) {
+    public Company update(String user,String name, String description, String moto, String owner, MultipartFile profilePicture, String imageSource, Integer employee, Integer interns) {
         if (name==null || name.isEmpty()){
             throw new IllegalArgumentException();
         }
@@ -67,6 +54,8 @@ public class CompanyServiceImpl  implements CompanyService {
     @Override
     public void deleteById(Long id) {
         this.companyRepository.deleteById(id);
+
+
 
     }
 
@@ -96,7 +85,7 @@ public class CompanyServiceImpl  implements CompanyService {
 
     @Override
     @Transactional
-    public Optional<Company> edit(User user,Long id, String name, String desc ,String owner, String moto, MultipartFile profilePicture,String imageSource, Integer numEm,Integer numInt) {
+    public Optional<Company> edit(String user,Long id, String name, String desc ,String owner, String moto, MultipartFile profilePicture,String imageSource, Integer numEm,Integer numInt) {
        Company company=this.companyRepository.findById(id).orElseThrow(IllegalArgumentException::new);
    company.setName(name);
    company.setDescription(desc);
@@ -112,7 +101,7 @@ public class CompanyServiceImpl  implements CompanyService {
     }
 
     @Override
-    public Optional<Company> save(User user,String name, String desc ,String owner, String moto,  MultipartFile profilePicture,String imageSource,Integer numEm, Integer numInt) {
+    public Optional<Company> save(String  user,String name, String desc ,String owner, String moto,  MultipartFile profilePicture,String imageSource,Integer numEm, Integer numInt) {
       return Optional.of(this.companyRepository.save(new Company(user,name,desc,owner,moto,imageSource,numEm,numInt)));
     }
 
@@ -122,12 +111,13 @@ public class CompanyServiceImpl  implements CompanyService {
     }
 
     @Override
-    public Company addEmployeeToCompany(User username, Long employeeId) {
-        Company company=this.getCompany(username).orElseThrow(()->new IllegalArgumentException());
-        Employee employee=this.employeeService.findById(employeeId)
-                .orElseThrow(()->new IllegalArgumentException());
+    public Company addEmployeeToCompany(Company company, Employee employee) {
+//        Company company=this.getCompany(username).orElseThrow(()->new IllegalArgumentException());
+//        Employee employee=this.employeeService.findById(employeeId).get();
+
+
         if (company.getEmployees()
-        .stream().filter(i->i.getId().equals(employeeId))
+        .stream().filter(i->i.getId().equals(employee.getId()))
         .collect(Collectors.toList()).size()>0)
             throw new IllegalArgumentException();
         company.getEmployees().add(employee);
@@ -136,21 +126,24 @@ public class CompanyServiceImpl  implements CompanyService {
     }
 
     @Override
-    public Optional<Company> getCompany(User username) {
+    public Optional<Company> getCompany(String username) {
 
 
 //        User user=this.userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException(username));
-        return this.companyRepository.findByUser(username);
+        return this.companyRepository.findByCompanyUsername(username);
 //                .orElseGet(()->{
 //            Company company=new Company(user);
 //        })
     }
 
+
     @Override
     public List<Employee> listEmployeesInCompany(Long companyId) {
-        if (this.companyRepository.findById(companyId).isPresent())
-            return this.companyRepository.findById(companyId).get().getEmployees();
+        if (this.companyRepository.findById(companyId).isPresent()) {
+            if (this.companyRepository.findById(companyId).get().getEmployees().size() > 0)
+                return this.companyRepository.findById(companyId).get().getEmployees();
+        }
 //        else throw new CompanyNotFountException(companyId);
-          else throw new IllegalArgumentException();
+          throw new EmployeesNotFound(companyId);
     }
 }
