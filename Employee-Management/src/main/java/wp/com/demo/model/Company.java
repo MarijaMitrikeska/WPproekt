@@ -27,7 +27,7 @@ public class Company {
 
     private  String companyUsername;
 
-//    @Column(nullable = true, length = 64)
+
     private String imageSource;
 
     @OneToMany(mappedBy = "companyId")

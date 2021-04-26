@@ -114,8 +114,4 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
 
-    @Override
-    public List<Employee> getEmployeesByQuery(String queryString) {
-        return this.employeeRepository.findByNameContaining(queryString);
-    }
 }

@@ -29,7 +29,7 @@ Optional <Employee>save(Company companyId, String name, String surname, Multipar
      void deleteByCompanyId(Company id);
     void deleteEmployeesByCompany(List<Employee> employees);
 
-    List<Employee> getEmployeesByQuery(String queryString);
+
 
 
 

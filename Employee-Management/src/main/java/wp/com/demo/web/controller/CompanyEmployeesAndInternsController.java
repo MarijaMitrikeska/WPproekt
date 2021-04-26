@@ -166,10 +166,7 @@ public class CompanyEmployeesAndInternsController {
 
     @PostMapping("/add/{id}")
     public String saveEmployee(
-
-            HttpServletRequest request,
             @PathVariable Long id,
-
             @RequestParam String name,
             @RequestParam String surname,
             @RequestParam String embg,
@@ -221,17 +218,7 @@ public class CompanyEmployeesAndInternsController {
 
 
 
-    @PostMapping("/search")
-    public String employeeInternSearch(@RequestParam(required = false) String searchString,
-                             HttpServletRequest request, Model model) {
-        if(searchString == null || searchString.isEmpty())
-            return "redirect:/home";
 
-        this.employeeService.getEmployeesByQuery(searchString);
-
-        model.addAttribute("bodyContent", "employee");
-        return "master-template";
-    }
 }
 
 

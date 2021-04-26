@@ -21,9 +21,5 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long> {
 
     List<Employee> findAllByCompanyId(Company company);
 
-//    List<Ad> getAdsByCompany_Id(String id);
-//
-//    List<Ad> findByTimestampContainingOrHeaderContainingIgnoreCaseOrCompany_NameContainingIgnoreCase(String timestamp, String header, String companyName);
 
-List<Employee>findByNameContaining(String name);
 }

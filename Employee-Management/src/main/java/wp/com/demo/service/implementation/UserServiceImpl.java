@@ -43,10 +43,13 @@ public class UserServiceImpl implements UserService {
             throw new UsernameExistsException(username);
 
         User user=new User(username,email,passwordEncoder.encode(password),role);
-        Company company=new Company(username,username,null,null,null,null,null,null);
-        companyRepository.save(company);
-        return userRepository.save(user);
-    }
+
+            Company company = new Company(username, username, null, null, null, null, null, null);
+
+            return userRepository.save(user);
+        }
+
+
 
     @Override
     public Optional<User> findByUsername(String username) {

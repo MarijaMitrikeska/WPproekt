@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name = "company_users")
 public class User implements UserDetails {
 
-    //UserDetails explanation
+
     @Id
     private String username;
 
