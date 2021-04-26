@@ -1,22 +1,21 @@
 package wp.com.demo.service.implementation;
 
-
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import wp.com.demo.model.Company;
 import wp.com.demo.model.Employee;
+import wp.com.demo.model.exceptions.EmployeeNotFoundException;
 import wp.com.demo.model.exceptions.InvalidCredentialsException;
-import wp.com.demo.repository.CompanyRepository;
+
 import wp.com.demo.repository.EmployeeRepository;
-import wp.com.demo.service.CompanyService;
+
 import wp.com.demo.service.EmployeeService;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -31,19 +30,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Optional<Employee> findById(Long id) {
+
         return this.employeeRepository.findById(id);
     }
 
-    @Override
-    public Employee findById(Employee id) {
-        return null;
-//                this.employeeRepository.findById(id);
-    }
-
-    @Override
-    public List<Employee> findByCompanyName(String name) {
-        return null;
-    }
 
     @Override
     @Transactional
@@ -54,29 +44,15 @@ public class EmployeeServiceImpl implements EmployeeService {
                 phone, projects, salary, experience)));
 
     }
-    @Override
-    public Employee addEmployeeToCompany(Company company, Employee employee) {
-//        Company company=this.getCompany(username).orElseThrow(()->new IllegalArgumentException());
-//        Employee employee=this.employeeService.findById(employeeId).get();
-//
-//        if (company.getEmployees()
-//                .stream().filter(i->i.getId().equals(employee.getId()))
-//                .collect(Collectors.toList()).size()>0)
-//            throw new IllegalArgumentException();
-////       return this.company.getEmployees().add(employee);
-//
-//        return this.employeeRepository.save(employee);
-        return null;
 
-    }
 
 
     @Override
     @Transactional
     public Optional<Employee> edit(Long id,Company companyId, String name, String surname, MultipartFile profilePicture, String imageSource, String embg, String email, String street, String city, String country, String jobTitle, String department, LocalDate employmentDate, String status,
                                    String phone, Integer projects, Integer salary, Integer experience) {
-        Employee employee=this.employeeRepository.findById(id).orElseThrow(InvalidCredentialsException::new);
-        //.orElseThrow(IllegalArgumentException::new);// EmployeeNotFoundException
+        Employee employee=this.employeeRepository.findById(id).orElseThrow(()-> new EmployeeNotFoundException(id));
+
         employee.setName(name);
         employee.setSurname(surname);
         employee.setEmbg(embg);
@@ -114,16 +90,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void deleteEmployeesByCompany(List<Employee> employees) {
+
         this.employeeRepository.deleteAll(employees);
     }
 
     @Override
     public Employee findCompanyId(Company companyId) {
+
         return  this.employeeRepository.findByCompanyId(companyId);
     }
 
     @Override
     public List<Employee> listAll() {
+
         return this.employeeRepository.findAll();
     }
 
@@ -133,4 +112,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 
+
+
+    @Override
+    public List<Employee> getEmployeesByQuery(String queryString) {
+        return this.employeeRepository.findByNameContaining(queryString);
+    }
 }

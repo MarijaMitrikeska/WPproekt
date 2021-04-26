@@ -1,70 +1,84 @@
 <section xmlns:th="http://www.thymeleaf.org">
-<div class="container">
-    <div class="profile">
-        <div class="profile-header">
-            <div class="profile-header-cover"></div>
-            <div class="profile-header-content">
-                <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">
-                <div class="profile-header-img">
-<!--                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" />-->
-                    <img th:src="${company.getImageSource()}" alt="">
-                </div>
-                <ul class="profile-header-tab nav nav-tabs nav-tabs-v2">
-                    <li class="nav-item">
-                        <a href="#profile-post" class="nav-link" data-target="#employees" data-toggle="tab">
-                            <div class="nav-field" >Employees</div>
-                            <div class="nav-value" th:text="${company.getEmployee_num()}"></div>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#profile-followers" class="nav-link active" data-target="#interns" data-toggle="tab">
-                            <div class="nav-field">Interns</div>
-                            <div class="nav-value" th:text="${company.getIntern_num()}"></div>
-                        </a>
-                    </li>
+    <div class="container">
+        <div class="profile">
+            <div class="profile-header">
+                <div class="profile-header-cover"></div>
+                <div class="profile-header-content">
+                    <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">
+                    <div class="profile-header-img">
 
-                </ul>
+                        <img th:src="${company.getImageSource()}" alt="">
+                    </div>
+                    <ul class="profile-header-tab nav nav-tabs nav-tabs-v2" id="myTabs">
+                        <li class="nav-item">
+                            <a href="#tab1" class="nav-link active" data-url="/tab1" data-toggle="tab">
+                                <div class="nav-field" >Employees</div>
+                                <div class="nav-value" th:text="${company.getEmployee_num()}"></div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#tab2" class="nav-link " data-url="/tab2" data-toggle="tab">
+                                <div class="nav-field">Interns</div>
+                                <div class="nav-value" th:text="${company.getIntern_num()}"></div>
+                            </a>
+                        </li>
 
-            </div>
-        </div>
-        <div class="profile-container"><!--Company information-->
-            <div class="profile-sidebar">
-                <div class="desktop-sticky-top">
-                    <h4 th:text="${company.getName()}"></h4>
-                    <div class="font-weight-600 mb-3 text-muted mt-n2" th:text="${company.getOwner()}"></div>
-                    <p th:text="${company.getDescription()}">
+                    </ul>
 
-                    </p>
-                    <div class="mb-1"><i class="fa fa-map-marker-alt fa-fw text-muted"></i> </div>
-                    <div class="mb-3"><i class="fa fa-link fa-fw text-muted"></i> </div>
-                    <hr class="mt-4 mb-4" />
+
+
                 </div>
             </div>
 
+            <div class="profile-container"><!--Company information-->
+                <div class="profile-sidebar">
+                    <div class="desktop-sticky-top">
+                        <h4 th:text="${company.getName()}"></h4>
+                        <div class="font-weight-600 mb-3 text-muted mt-n2" th:text="${company.getOwner()}"></div>
+                        <p th:text="${company.getDescription()}">
 
+                        </p>
+<!--                        <div class="mb-1"><i class="fa fa-map-marker-alt fa-fw text-muted"></i> </div>-->
+<!--                        <div class="mb-3"><i class="fa fa-link fa-fw text-muted"></i> </div>-->
+<!--                        <hr class="mt-4 mb-4" />-->
+                    </div>
+                </div>
 
-                <div class="profile-content" id="employees">
+<!--                Employees tab information-->
+                <div class="tab-content pt-3">
+                    <div class="tab-pane active" id="tab1">
+                        <div class="profile-content" id="employees">
                     <div class="row" th:if="${employees.size()>0}">
+<!--                    else no employee to show    lse-->
 
 
 
-                        <div class="col-xl-12" th:each="employee:${employees}">
-                            <div class="tab-content p-0">
+                        <div class="col-xl-12" th:each="employee:${employees}"  >
+                            <div class="tab-content p-0" >
                                 <div class="tab-pane fade active show" id="profile-followers">
                                     <div class="list-group" >
 
                                         <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">
                                         <div class="list-group-item d-flex align-items-center" >
-<!--                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="50px" class="rounded-sm ml-n2" />-->
+                                            <!--                                            <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" width="50px" class="rounded-sm ml-n2" />-->
                                             <img width="50px" class="rounded-sm ml-n2"  name="personImage" th:src="${employee.getImageSource()}" alt="">
                                             <div class="flex-fill pl-3 pr-3">
                                                 <div class="text-dark font-weight-600" th:text="${employee.getName()}"></div>
                                                 <div class="text-muted fs-13px" th:text="${employee.getJobTitle()}"></div>
                                             </div>
 
-                                            <a th:href="@{'/employee-profile/{id}'(id=${employee.getId()})}" class="btn btn-outline-primary">See profile</a>
-                                            <a th:href="@{'/employee-profile/delete/{id}'(id=${employee.getId()})}" th:method="DELETE" class="btn btn-outline-primary ">
-                                                <i class="fa fa-trash">Delete</i></a>
+                                            <a th:href="@{'/employee-profile/{id}'(id=${employee.getId()})}" class="btn btn-outline-info mr-3">See profile</a>
+
+                                            <form th:action="@{'/employees/delete/{id}'(id=${employee.getId()})}"
+                                                  th:method="DELETE">
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-danger " value="Delete">
+                                                    Delete
+
+                                                </button>
+                                            </form>
+
+
                                         </div>
 
 
@@ -74,29 +88,67 @@
                         </div>
                     </div>
                 </div>
+                    </div>
+
+                    <div class="tab-pane" id="tab2">
+                        <div class="profile-content" id="interns">
+                            <div class="row" th:if="${interns.size()>0}">
+
+
+                                <div class="col-xl-12" th:each="intern:${interns}">
+                                    <div class="tab-content p-0">
+                                        <div class="tab-pane fade active show" >
+                                            <div class="list-group" >
+
+                                                <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">
+                                                <div class="list-group-item d-flex align-items-center" >
+                                                    <img width="50px" class="rounded-sm ml-n2"  name="personImage" th:src="${intern.getImageSource()}" alt="">
+                                                    <div class="flex-fill pl-3 pr-3">
+                                                        <div class="text-dark font-weight-600" th:text="${intern.getName()}"></div>
+                                                        <div class="text-muted fs-13px" th:text="${intern.getIntership_section()}"></div>
+                                                    </div>
+
+                                                    <a th:href="@{'/intern-profile/{id}'(id=${intern.getId()})}" class="btn btn-outline-info mr-3">See profile</a>
+
+                                                    <form th:action="@{'/employees/deleteIntern/{id}'(id=${intern.getId()})}"
+                                                          th:method="DELETE">
+                                                        <button type="submit"
+                                                                class="btn btn-sm btn-danger " value="Delete">
+                                                            Delete
+
+                                                        </button>
+                                                    </form>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
         </div>
-    <div class="col mb-3">
-        <div class="row">
-            <a th:href="@{'/employees/add-employee/{id}'(id=${company.getId()})}" class="btn btn-md btn-dark add-employee-btn aling" style="margin-left: 900px">
-                Add new employee
-            </a>
+        <div class="col mb-3 ">
+            <div class="row">
+                <a th:href="@{'/employees/add-employee/{id}'(id=${company.getId()})}" class="btn btn-md btn-dark add-employee-btn aling" style="margin-left: 900px">
+                    Add new employee
+                </a>
+            </div>
+        </div>
+        <div class="col mb-3 ">
+            <div class="row">
+                <a th:href="@{'/employees/add-intern/{id}'(id=${company.getId()})}" class="btn btn-md btn-dark add-employee-btn aling" style="margin-left: 900px">
+                    Add new intern
+                </a>
+            </div>
         </div>
     </div>
-</div>
 
-
-
-
-
-<!--            <a href="/employees/add-employee" class="btn btn-block btn-dark add-product-btn">-->
-<!--                Add new employee-->
-<!--            </a>-->
-
-<!--            <a  th:href="@{'/employees/{id}' (id=${company.getId()})}" class="border-btn">See employees</a-->
-
-
-
-
-
+    <div id="back-top" >
+        <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+    </div>
 </section>

@@ -1,0 +1,302 @@
+<section xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="profile-card-4 z-depth-3">
+                    <div class="card">
+                        <div class="card-body text-center bg-primary rounded-top">
+                            <div class="user-box">
+                                <img th:src="${intern.getImageSource()}" alt="personImage">
+                            </div>
+
+                            <h6 class="text-light" th:text="${intern.getName()} + ${intern.getSurname}" > </h6>
+
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group shadow-none">
+                                <li class="list-group-item">
+                                    <div class="list-icon">
+                                        <i class="fa fa-phone-square"></i>
+                                    </div>
+                                    <div class="list-details">
+                                        <span th:text="${intern.getPhone()}" ></span><br/>
+                                        <small >Mobile Phone</small>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="list-icon">
+                                        <i class="fa fa-envelope"></i>
+                                    </div>
+                                    <div class="list-details">
+                                        <span th:text="${intern.getEmail()}"></span><br/>
+                                        <small >Email Address</small>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="list-icon">
+                                        <i class="fa fa-briefcase"></i>
+                                    </div>
+                                    <div class="list-details">
+                                        <span th:text="${intern.getIntership_section()}"></span><br/>
+                                        <small>Section</small>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="row text-center mt-4">
+                                <div class="col p-2">
+                                    <h4 class="mb-1 line-height-5" th:text="${intern.getProjects()}" ></h4>
+                                    <small class="mb-0 font-weight-bold">Projects</small>
+                                </div>
+                                <div class="col p-2">
+                                    <h4 class="mb-1 line-height-5"  th:text="${intern.getExperience()}"></h4>
+                                    <small class="mb-0 font-weight-bold">Years of experience</small>
+                                </div>
+                                <div class="col p-2">
+                                    <h4 class="mb-1 line-height-5" th:text="${intern.getIntership_salary()}"  ></h4>
+                                    <small class="mb-0 font-weight-bold" >Salary</small>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card z-depth-3">
+                    <div class="card-body">
+                        <ul class="nav nav-pills nav-pills-primary nav-justified">
+                            <li class="nav-item">
+                                <a href="#profile" data-url="/profile" data-toggle="tab" class="nav-link active "><i class="icon-user"></i> <span class="hidden-xs">Profile</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#edit" data-url="/edit" data-toggle="tab" class="nav-link"><i class="icon-note"></i> <span class="hidden-xs">Edit</span></a>
+                            </li>
+                        </ul>
+
+<!--                        Profile information-->
+                        <div class="tab-content p-5 ">
+                            <div class="tab-pane active show" id="profile">
+                                <!--<h5 class="mb-3">User Profile</h5>--><!-- name of the employee-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3 class="mb-3 font-weight-bold">Personal Information</h3>
+
+                                        <div>
+                                            <h4>Embg</h4>
+                                            <p th:text="${intern.getEmbg()}">
+
+                                            </p>
+                                        </div>
+
+
+                                        <div>
+                                            <h6>Address</h6>
+                                            <p th:text="${intern.getStreet()} + ${intern.getCity()} + ${intern.getCountry()}">
+
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <h3 class="mb-3 font-weight-bold">Internship Information</h3>
+
+                                    <div>
+                                        <h6>Department</h6>
+                                        <p th:text="${intern.getDepartment()}">
+
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <h6>Employment date</h6>
+                                        <p th:text="${intern.getIntership_start()}">
+
+                                        </p>
+                                    </div>
+                                        </div>
+
+
+
+                                </div>
+                                <!--/row-->
+                            </div>
+
+                            <div class="tab-pane" id="edit" >
+
+                                <form th:action="@{'/intern-profile/add/{id}'(id=${intern.getId()})}" method="POST"  enctype="multipart/form-data">
+
+                                    <input id="id" type="hidden" name="id" th:value="(${intern} != null ? ${intern.getId()} : '')">
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">First name</label>
+                                        <div class="col-lg-9 input-group-lg">
+                                            <input class="form-control" type="text"
+                                                   id="name"
+                                                   name="name"
+                                                   th:value="(${intern} != null ? ${intern.getName()} : '')"
+                                                   placeholder="Enter intern name" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Last name</label>
+                                        <div class="col-lg-9 input-group-lg">
+                                            <input class="form-control" type="text"
+                                                   name="surname"
+                                                   th:value="(${intern} != null ? ${intern.getSurname()} : '')"
+                                                   placeholder="Enter intern surname" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Phone Number</label>
+                                        <div class="col-lg-9 input-group-lg">
+                                            <input class="form-control" type="number" th:value="(${intern} != null ? ${intern.getPhone()} : '')"
+                                                   name="phone"
+                                                   placeholder="Enter phone number" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Email</label>
+                                        <div class="col-lg-9 input-group-lg">
+                                            <input class="form-control" type="email" th:value="(${intern} != null ? ${intern.getEmail()} : '')"
+                                                   placeholder="Enter company name"
+                                                   name="email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Change profile</label>
+                                        <div class="col-lg-9 input-group-lg">
+                                            <input class="form-control" type="file"   accept="image/png, image/jpeg"
+                                                   name="personImage" th:src="(${intern} != null ? ${intern.getImageSource()} : '')">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Internship Section</label>
+                                        <div class="col-lg-9 input-group-lg">
+                                            <input class="form-control" th:value="(${intern} != null ? ${intern.getIntership_section()} : '')"
+                                                   name="internship_section" placeholder="Enter company name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Address</label>
+                                        <div class="col-lg-9 input-group-lg mb-4">
+                                            <input class="form-control" type="text" th:value="(${intern} != null ? ${intern.getStreet()} : '')"
+                                                   name="street" placeholder="Enter company name">
+                                        </div>
+
+
+
+                                        <label class="col-lg-3 col-form-label form-control-label"></label>
+                                        <div class="col-lg-6 input-group-lg">
+                                            <input class="form-control" type="text" th:value="(${intern} != null ? ${intern.getCity()} : '')"
+                                                   placeholder="Enter company name"
+                                                   name="city">
+                                        </div>
+
+
+                                        <div class="col-lg-3 input-group-lg">
+                                            <input class="form-control" type="text" th:value="(${intern} != null ? ${intern.getCountry()} : '')"
+                                                   placeholder="Enter company name"
+                                                   name="country">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Department</label>
+                                        <div class="col-lg-9 input-group-lg">
+                                            <input class="form-control" type="text" th:value="(${intern} != null ? ${intern.getDepartment()} : '')"
+                                                   placeholder="Enter company name"
+                                                   name="department">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Employment Date</label>
+                                        <div class="col-lg-9 input-group-lg">
+                                            <input class="form-control" type="date"
+
+                                                   id="date"
+                                                   name="internship_start"
+                                                   th:value="(${intern} != null ? ${intern.getIntership_start()} : '')">
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Embg</label>
+                                        <div class="col-lg-9 input-group-lg">
+                                            <input class="form-control" type="text"
+
+                                                   id="embg"
+                                                   name="embg"
+                                                   th:value="(${intern} != null ? ${intern.getEmbg()} : '')"
+                                                   placeholder="Enter product name">
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Salary</label>
+                                        <div class="col-lg-9 input-group-lg">
+                                            <input class="form-control" type="number"
+                                                   id="salary"
+                                                   name="internship_salary"
+                                                   th:value="(${intern} != null ? ${intern.getIntership_salary()} : '')"
+
+                                                   placeholder="Enter product name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Experience</label>
+                                        <div class="col-lg-9 input-group-lg">
+                                            <input class="form-control" type="number"
+                                                   id="experience"
+                                                   name="experience"
+                                                   th:value="(${intern} != null ? ${intern.getExperience()} : '')"
+
+                                                   placeholder="Enter product name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Projects</label>
+                                        <div class="col-lg-9 input-group-lg">
+                                            <input class="form-control" type="number"
+                                                   id="projects"
+                                                   name="projects"
+                                                   th:value="(${intern} != null ? ${intern.getProjects()} : '')"
+
+                                                   placeholder="Enter product name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label">Projects</label>
+                                        <div class="col-lg-9 input-group-lg">
+                                            <input class="form-control" type="number"
+                                                   id="projects"
+                                                   name="intership_duration"
+                                                   th:value="(${intern} != null ? ${intern.getIntership_duration()} : '')"
+
+                                                   placeholder="Enter product name">
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="form-group row">
+                                        <label class="col-lg-3 col-form-label form-control-label"></label>
+                                        <div class="col-lg-9">
+                                            <a th:href="@{'/intern-profile/{id}'(id=${intern.getId()})}" type="reset" class="btn btn-dark" value="Cancel">Cancel</a>
+                                            <button id="submit" type="submit" class="btn btn-dark">Submit</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        </div>
+
+</section>

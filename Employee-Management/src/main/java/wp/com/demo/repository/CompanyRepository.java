@@ -12,10 +12,9 @@ import java.util.Optional;
 @Repository
 public interface CompanyRepository extends JpaRepository<Company,Long> {
 
-void deleteByName(String name);
-Optional<Company>findByCompanyUsername(String user);
+    void deleteByName(String name);
+    Optional<Company>findByCompanyUsername(String user);
 
-//    Optional<Company> findById(Long id);
     boolean existsById(Long id);
 
 

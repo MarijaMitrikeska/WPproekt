@@ -14,10 +14,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final CustomAuthenticationProvider customAuthenticationProvider;
+    private final PasswordEncoder passwordEncoder;
 
-    public WebSecurityConfiguration( CustomAuthenticationProvider customAuthenticationProvider) {
+    public WebSecurityConfiguration(CustomAuthenticationProvider customAuthenticationProvider, PasswordEncoder passwordEncoder) {
 
         this.customAuthenticationProvider = customAuthenticationProvider;
+        this.passwordEncoder = passwordEncoder;
     }
 
 
@@ -26,9 +28,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/home", "/assets/**", "/register", "/login","/about-us").permitAll()
+                .antMatchers("/", "/home", "/register", "/login","/about-us").permitAll()
                 .antMatchers("/css/**", "/fonts/**", "/images/**", "/js/**", "/vendor/**","/assets/**","/syntax-highlighter/**").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -43,14 +44,23 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .clearAuthentication(true)
                 .invalidateHttpSession(true)
                 .deleteCookies("JSESSIONID")
-//                .logoutSuccessUrl("/home")
-                .and()
-                .exceptionHandling().accessDeniedPage("/home");
+                .logoutSuccessUrl("/home");
+//                .and()
+//                .exceptionHandling().accessDeniedPage("/home");
 
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) {
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+                auth.inMemoryAuthentication()
+                .withUser("viktorija.nikolovska")
+                .password(passwordEncoder.encode("vn"))
+                .authorities("ROLE_ADMIN")
+                .and()
+                .withUser("marija.mitrikeska")
+                .password(passwordEncoder.encode("mm"))
+                .authorities("ROLE_ADMIN");
+
 
         auth.authenticationProvider(this.customAuthenticationProvider);
     }

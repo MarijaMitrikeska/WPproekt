@@ -1,16 +1,5 @@
 <section xmlns:th="http://www.thymeleaf.org">
-    <!-- ? Preloader Start -->
-<!--    <div id="preloader-active">-->
-<!--        <div class="preloader d-flex align-items-center justify-content-center">-->
-<!--            <div class="preloader-inner position-relative">-->
-<!--                <div class="preloader-circle"></div>-->
-<!--                <div class="preloader-img pere-text">-->
-<!--                    <img src="assets/img/logo/loder.gif" alt="">-->
-<!--                    &lt;!&ndash;<img src="../images/logo-spin.gif" alt="">&ndash;&gt;-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+
 
     <!-- Company area start -->
         <div class="courses-area section-padding40 fix">
@@ -18,126 +7,14 @@
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-8">
                         <div class="section-tittle text-center mb-55">
-                            <h1 >Companies</h1>
+                            <h1 class="uppercase font-weight-bold gj-font-size-16">Companies</h1>
                         </div>
                     </div>
                 </div>
+
                 <div class="row" th:if="${companies.size()>0}">
-                    <!--<div class="col-lg-4">
-                        <div class="properties properties2 mb-30">
-                            <div class="properties__card">
-                                <div class="properties__img overlay1">-->
-                                    <!--<a href="#"><img src="assets/img/gallery/featured1.png" alt=""></a>-->
-                                    <!--<a href="#"><img src="../images/Webbes.png" alt=""></a>
-                                </div>
-                                <div class="properties__caption">
-                                    <h3>Webbes</h3>
+                    <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">
 
-                                    <h5> Build your dream website with us !!
-                                    </h5>
-                                    <p>
-                                        Our web design & development team has established a host of effective services to facilitate the growth of your business. These include WordPress websites and eCommerce solutions focused on usability and responsive design, creative branding solutions that inject personality into your business, and custom programming for ideas that you need help bringing to life.
-                                    </p>-->
-                                    <!--<div class="properties__footer d-flex justify-content-between align-items-center">
-                                        <div class="restaurant-name">
-                                            <div class="rating">
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star"></i>
-                                                <i class="fas fa-star-half"></i>
-                                            </div>
-                                            <p><span>(4.5)</span> based on 120</p>
-                                        </div>
-
-                                    </div>-->
-                                    <!--<a href="/company-profile" class="border-btn border-btn2">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="properties properties2 mb-30">
-                            <div class="properties__card">
-                                <div class="properties__img overlay1">
-                                    <a href="#"><img src="../images/Adventurery.png" alt=""></a>
-                                </div>
-                                <div class="properties__caption">
-                                    <h3>Adventurery</h3>
-                                    <h5>Discover the world with us.</h5>
-                                    <p>
-                                        Through compelling images and well-crafted stories, research and curated news of interest, Adventurery inspires the curious to try new destinations, branch out in their activities, interact deeply with nature, and experience different cultures in every part of the world.
-                                    </p>-->
-                                    <!--
-                                    Adventure.Travel is the go-to source for information on adventure travel that prioritizes sustainability, serves as a force for good, and transforms people and places. From research and trends to best travel practices, ideal gear, and destinations and operators with outstanding commitments to responsible travel, we have everything you need to make sure your adventures align with your values.
-
-Life-changing travel must also be sustainable travel. By bringing together a growing community of people committed to traveling thoughtfully and considerately, we help shape the adventure and eco-tourism industry as it grows. In response to travelers’ desires, tour operators, destinations and travel advisors are increasingly working to ensure their experiences provide an unforgettable journey in a responsible, sustainable way. Such commitment in turn honors the people, environment and economies of incredible destinations around the world.-->
-
-
-                                    <!--<a href="/company-profile" class="border-btn border-btn2">Read more</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="properties properties2 mb-30">
-                            <div class="properties__card">
-                                <div class="properties__img overlay1">
-                                    <a href="#"><img src="../images/Quest.png" alt=""></a>
-                                </div>
-                                <div class="properties__caption">
-                                    <h3>Quest</h3>
-                                    <h5>Are you ready to win ?</h5>
-                                    <p>
-                                        Quest is an innovative and creative company that brings ideas to reality.
-                                    </p>
-
-                                    <a href="/company-profile" class="border-btn border-btn2">Read more</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="properties properties2 mb-30">
-                            <div class="properties__card">
-                                <div class="properties__img overlay1">
-                                    <a href="#"><img src="../images/Iluminate.png" alt=""></a>
-                                </div>
-                                <div class="properties__caption">
-                                    <h3>Iluminate</h3>
-                                    <h5>Your dream advertising</h5>
-                                    <p>
-
-                                    </p>
-
-                                    <a href="/company-profile" class="border-btn border-btn2">Read more</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="properties properties2 mb-30">
-                            <div class="properties__card">
-                                <div class="properties__img overlay1">
-                                    <a href="#"><img src="../images/Bloom.png" alt=""></a>
-                                </div>
-                                <div class="properties__caption">
-                                    <h3>Bloom</h3>
-                                    <h5>A rose is the dose of love</h5>
-                                    <p>
-
-                                    </p>
-
-                                    <a href="/company-profile" class="border-btn border-btn2">Read more</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>-->
-<!--                    <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">-->
                     <div class="col-lg-4" th:each="company:${companies}">
                         <div class="properties properties2 mb-30 company" >
                             <div class="properties__card">
@@ -171,40 +48,12 @@ Life-changing travel must also be sustainable travel. By bringing together a gro
                             </div>
 
                         </div>
-
-
-
-
-
-                    </div>
-                </div>
-                   <!-- <div class="col-lg-4">
-                        <div class="properties properties2 mb-30">
-                            <div class="properties__card">
-                                <div class="properties__img overlay1">
-                                    <a href="#"><img src="../images/Magna.png" alt=""></a>
-                                </div>
-                                <div class="properties__caption">
-                                    <h3>Magna photography</h3>
-                                    <h5>Capture the moment</h5>
-                                    <p>Taking an image, freezing a moment, reveals how rich reality truly is.
-                                    </p>
-
-                                    <a href="/company-profile" class="border-btn border-btn2">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
-                <div class="row justify-content-center">
-                    <div class="col-xl-7 col-lg-8">
-                        <div class="section-tittle text-center mt-40">
-                            <a href="#" class="border-btn">Load More</a>
-                        </div>
                     </div>
                 </div>
 
-<!--                <th:block sec:authorize="hasRole('ROLE_ADMIN')">-->
+
+
+                <th:block sec:authorize="hasRole('ROLE_ADMIN')">
                 <div class="row justify-content-center">
                     <div class="col-xl-7 col-lg-8">
                         <div class="section-tittle text-center mt-40">
@@ -212,7 +61,7 @@ Life-changing travel must also be sustainable travel. By bringing together a gro
                         </div>
                     </div>
                 </div>
-<!--                </th:block>-->
+                </th:block>
             </div>
         </div>
         <!-- Companies area End -->

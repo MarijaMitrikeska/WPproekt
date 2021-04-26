@@ -1,118 +1,15 @@
-<!--<section xmlns:th="http://www.thymeleaf.org">-->
-<!--    <div class="container bootstrap snippets bootdey autoScroll">-->
-
-<!--        <div class="container">-->
-<!--            <div class="row">-->
-<!--                <div class="col-md-12">-->
-
-<!--                    &lt;!&ndash;<article class="text-center">&ndash;&gt;-->
-<!--                    &lt;!&ndash;<figure>-->
-<!--                        <img class="img-responsive img-circle img-thumbnail img-user" src="https://bootdey.com/img/Content/avatar/avatar7.png">-->
-<!--                    </figure>&ndash;&gt;-->
-
-<!--                    <form action="/company-profile/add" method="POST" th:object="${company}" enctype="multipart/form-data">-->
-<!--                        <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">-->
-
-<!--                        <div class="form-group">-->
-<!--                            <label for="name" path="image">Profile picture</label>-->
-<!--                            &lt;!&ndash;                            <div class="col-lg-9">&ndash;&gt;-->
-<!--                            <input class="form-control" type="file" name="image" accept="image/png, image/jpeg" th:src="${company.getImageSource()}"-->
-<!--                            th:value="${company.getImageSource()}">-->
-<!--                            &lt;!&ndash;                                </div>&ndash;&gt;-->
-<!--                        </div>-->
-
-<!--                        <div class="form-group">-->
-<!--                            <label for="name">Company name</label>-->
-<!--                            <input type="text"-->
-<!--                                   class="form-control"-->
-<!--                                   id="name"-->
-<!--                                   name="name"-->
-<!--                                   required-->
-<!--                                   th:value="(${company} != null ? ${company.getName()} : '')"-->
-<!--                                   placeholder="Enter company name">-->
-
-
-<!--                        </div>-->
-<!--                        <div class="form-group">-->
-<!--                            <label for="name">Company descriotion</label>-->
-<!--                            <input type="text"-->
-<!--                                   class="form-control"-->
-<!--                                   id="description"-->
-<!--                                   name="description"  required-->
-<!--                                   th:value="(${company} != null ? ${company.getDescription()} : '')"-->
-<!--                                   placeholder="Enter product name">-->
-
-
-<!--                        </div>-->
-
-<!--                        <div class="form-group">-->
-<!--                            <label for="name">Company moto</label>-->
-<!--                            <input type="text"-->
-<!--                                   class="form-control"-->
-<!--                                   id="moto"-->
-<!--                                   name="moto" required-->
-<!--                                   th:value="(${company} != null ? ${company.getMoto()} : '')"-->
-<!--                                   placeholder="Enter product name">-->
-
-
-<!--                        </div>-->
-<!--                        <div class="form-group">-->
-<!--                            <label for="name">Company owner</label>-->
-<!--                            <input type="text"-->
-<!--                                   class="form-control"-->
-<!--                                   id="owner"-->
-<!--                                   name="owner"  required-->
-<!--                                   th:value="(${company} != null ? ${company.getOwner()} : '')"-->
-<!--                                   placeholder="Enter product name">-->
-
-
-<!--                        </div>-->
-<!--                        <div class="form-group">-->
-<!--                            <label for="name">Company employees</label>-->
-<!--                            <input type="number"-->
-<!--                                   class="form-control"-->
-<!--                                   id="employee"-->
-<!--                                   name="numEmployee"  required-->
-<!--                                   th:value="(${company} != null ? ${company.getEmployee_num()} : '')"-->
-<!--                                   placeholder="Enter product name">-->
-
-
-<!--                        </div>-->
-<!--                        <div class="form-group">-->
-<!--                            <label for="name">Company employees</label>-->
-<!--                            <input type="number"-->
-<!--                                   class="form-control"-->
-<!--                                   id="intern"-->
-<!--                                   name="numInterns" required-->
-<!--                                   th:value="(${company} != null ? ${company.getIntern_num()} : '')"-->
-<!--                                   placeholder="Enter product name">-->
-
-
-<!--                        </div>-->
-
-
-<!--                        <button id="submit" type="submit" class="btn btn-default">Submit</button>-->
-<!--                        <a type="button" class="btn btn-primary" href="/company-profile">Back</a>-->
-<!--                    </form>-->
-<!--                    &lt;!&ndash;<h3 class="text-primary">Hi.</h3>-->
-<!--                    <h4 class="text-info">My name is bootdey</h4>-->
-<!--                    <p>I'm a web designer / developer, love bootstrap, love html css js, I have a </p>-->
-<!--                    <p>passion for web design and love to create for web and mobile devices.</p>&ndash;&gt;-->
-<!--                    &lt;!&ndash; </article>&ndash;&gt;-->
-
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--</section>-->
-
 <section xmlns:th="http://www.thymeleaf.org">
     <div class="container bootstrap snippets bootdey autoScroll">
         <div class="container">
+            <h2 class="col-lg-6 justify-content-center"> Add Company Information</h2>
+            <br/>
+            <hr/>
+            <hr/>
             <div class="row ">
                 <div class="col-md-12">
-                    <form  action="/company-profile/add" method="POST" th:object="${company}" enctype="multipart/form-data" class="col-md-12">
+
+
+                    <form  th:action="@{'/company-profile/add/{id}' (id=${company.getId()})}" method="POST" th:object="${company}" enctype="multipart/form-data" class="col-md-12">
 
                         <input id="id" type="hidden" name="id" th:value="(${company} != null ? ${company.getId()} : '')">
 
@@ -122,59 +19,49 @@
                                 <input type="file" class="btn btn-primary text-uppercase form-control" name="image"
                                        th:src="(${company} != null ? ${company.getImageSource()} : '')"
                                        id="imgInp" style="width:50%">
-
                                 <img th:src="${company.getImageSource()}" alt="image" id="blah" name="image" class="img-thumbnail md-margin-bottom-10"
                                 >
-                                <!--                        <a href="#" class="avatar-">-->
-                                <!--                        </a>-->
+
                             </div>
-
-
-
-
-
                         </div>
 
                         <div class="col-lg-6 ">
-
-
-                            <h2 class="col-lg-12"> Company Information</h2>
-                            <!--                    <form class="tm-signup-form row">-->
-                            <div class="form-group col-lg-12">
+                            <div class="form-group col-lg-12 input-group-lg">
                                 <label for="name">Name</label>
-                                <input id="name" name="name" type="text" class="form-control validate-input"
+                                <input id="name" name="name" type="text" class="form-control  "
                                        th:value="(${company} != null ? ${company.getName()} : '')">
                             </div>
-                            <div class="form-group col-lg-12">
+                            <div class="form-group col-lg-12 input-group-lg">
                                 <label for="name">Description</label>
-                                <input id="name" name="description" type="text" class="form-control validate-input"
+                                <input id="description" name="description" type="text" class="form-control validate-input"
                                        th:value="(${company} != null ? ${company.getDescription()} : '')">
 
                             </div>
-                            <div class="form-group col-lg-12">
+                            <div class="form-group col-lg-12 input-group-lg">
                                 <label for="name">Moto</label>
-                                <input id="name" name="moto" type="text" class="form-control validate-input"
+                                <input id="moto" name="moto" type="text" class="form-control validate-input"
                                        th:value="(${company} != null ? ${company.getMoto()} : '')">
                             </div>
-                            <div class="form-group col-lg-12">
+                            <div class="form-group col-lg-12 input-group-lg">
                                 <label for="name">Owner</label>
-                                <input id="name" name="owner" type="text" class="form-control validate-input"
+                                <input id="owner" name="owner" type="text" class="form-control validate-input"
                                        th:value="(${company} != null ? ${company.getOwner()} : '')" >
                             </div>
-                            <div class="form-group col-lg-12">
+                            <div class="form-group col-lg-12 input-group-lg">
                                 <label for="name">Number of Employees</label>
-                                <input id="name" name="numEmployee" type="text" class="form-control validate-input"
+                                <input id="employees" name="numEmployee" type="text" class="form-control validate-input"
                                        th:value="(${company} != null ? ${company.getEmployee_num()} : '')" >
                             </div>
-                            <div class="form-group col-lg-12">
+                            <div class="form-group col-lg-12 input-group-lg">
                                 <label for="name">Number of Interns</label>
-                                <input id="name" name="numInterns" type="text" class="form-control validate-input"
+                                <input id="interns" name="numInterns" type="text" class="form-control validate-input"
                                        th:value="(${company} != null ? ${company.getIntern_num()} : '')" >
                             </div>
                             <div class="form-group col-lg-6">
 
-                                <button type="submit" class="btn btn-primary btn-block text-uppercase mb-3" style="width:50%">Save company</button>
-                                <a href="/manage-companies" type="reset" class="btn btn-primary" >Cancel</a>
+                                <button type="submit" class="btn btn-dark btn-block text-uppercase mb-3" >Save company</button>
+                                <a th:href="@{'/company-profile/{id}' (id=${company.getId()})}" type="reset" class="btn btn-dark" >Cancel</a>
+
                             </div>
 
 

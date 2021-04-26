@@ -16,10 +16,14 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long> {
     void deleteById(Long id);
 
     Employee findByCompanyId(Company companyId);
-//    Employee findById(Employee employee);
+
     void  deleteByCompanyId(Company company);
 
-
-
     List<Employee> findAllByCompanyId(Company company);
+
+//    List<Ad> getAdsByCompany_Id(String id);
+//
+//    List<Ad> findByTimestampContainingOrHeaderContainingIgnoreCaseOrCompany_NameContainingIgnoreCase(String timestamp, String header, String companyName);
+
+List<Employee>findByNameContaining(String name);
 }

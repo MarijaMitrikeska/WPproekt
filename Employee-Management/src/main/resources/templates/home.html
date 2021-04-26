@@ -57,16 +57,11 @@
 
 
                     <th:block sec:authorize="hasRole('ROLE_ADMIN')">
-                        <li><a href="/manage-companies"class="smoothScroll">Manage companies</a></li>
+                        <li><a href="/manage-companies" class="smoothScroll">Manage companies</a></li>
                     </th:block>
                     <th:block sec:authorize="hasRole('ROLE_USER')">
                         <li><a href="/manage-companies" class="smoothScroll">View companies</a></li>
                     </th:block>
-               <!-- <th:block sec:authorize="hasRole('ROLE_USER')">
-                    <li><a th:href="@{'/employees/{id}' (id=${company.getId()})}" class="smoothScroll">View employees</a></li>
-                </th:block> Id not in getpage in conrolletr-->
-
-
 
 
 

@@ -1,114 +1,137 @@
 <section xmlns:th="http://www.thymeleaf.org">
     <div class="container">
-<div class="tab-pane" id="edit">
 
-<!--    th:object="${company}"-->
+        <h2 class="font-weight-bold ">Add Employee Information Form</h2>
+        <hr />
+        <hr/>
+        <div class="tab-pane" id="edit">
+
+
 
     <form th:action="@{'/employees/add/{id}'(id=${company.getId()})}" th:object="${company}" method="POST"  enctype="multipart/form-data">
 
-<!--        <form action="/employees/add" method="POST"  enctype="multipart/form-data">-->
-
-<!--            <input id="id" type="hidden" name="id" th:value="(${employee} != null ? ${employee.getId()} : '')">-->
-                  <div class="form-group row">
-                        <label class="col-lg-3 col-form-label form-control-label">First name</label>
-                        <div class="col-lg-9">
+        <h3 class="font-weight-bold">Personal information</h3>
+        <br/>
+            <div class="form-group row">
+                        <label class="col-lg-3 col-form-label form-control-label">Name</label>
+                        <div class="col-lg-4">
                             <input class="form-control" type="text"
                                    id="name"
                                    name="name"
-                                   placeholder="Enter product name">
+                                   placeholder="Enter employee name" required>
 <!--                                   th:value="(${employee} != null ? ${employee.getName()} : '')"-->
 
                         </div>
+                <div class="col-lg-4">
+                    <input class="form-control" type="text"
+                           id="surname"
+                           name="surname"
+                           placeholder="Enter employee surname" required>
+                    <!--                       th:value="(${employee} != null ? ${employee.getSurname()} : '')"-->
+
+
+                </div>
         </div>
         <div class="form-group row">
-            <label class="col-lg-3 col-form-label form-control-label">Last name</label>
-            <div class="col-lg-9">
+            <label class="col-lg-3 col-form-label form-control-label">Embg</label>
+            <div class="col-lg-8">
                 <input class="form-control" type="text"
-                       id="surname"
-                       name="surname"
-                       placeholder="Enter employee NAME name">
-<!--                       th:value="(${employee} != null ? ${employee.getSurname()} : '')"-->
+                       id="embg"
+                       name="embg" placeholder="Enter employee embg" >
+                <!--                       th:value="(${employee} != null ? ${employee.getEmbg()} : '')"-->
 
-
+                <!--                       placeholder="Enter product name">-->
             </div>
         </div>
+<!--        <div class="form-group row">-->
+<!--            <label class="col-lg-3 col-form-label form-control-label">Last name</label>-->
+<!--          -->
+<!--        </div>-->
         <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label">Phone Number</label>
 
-            <div class="col-lg-9">
+            <div class="col-lg-8">
                 <input class="form-control" type="text"
                        id="phone"
-                       name="phone" placeholder="Enter product name">
+                       name="phone" placeholder="Enter phone number">
 <!--                       th:value="(${employee} != null ? ${employee.getPhone()} : '')"-->
-
-
             </div>
         </div>
         <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label">Email</label>
-            <div class="col-lg-9">
-                <input class="form-control" type="text"
+            <div class="col-lg-8">
+                <input class="form-control" type="email"
                        id="email"
-                       name="email"  placeholder="Enter product name">
+                       name="email"  placeholder="Enter email" required>
 <!--                       th:value="(${employee} != null ? ${employee.getEmail()} : '')"-->
 
 
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-lg-3 col-form-label form-control-label">Change profile</label>
-            <div class="col-lg-9">
+            <label class="col-lg-3 col-form-label form-control-label">Change picture</label>
+            <div class="col-lg-8">
                 <input class="form-control" type="file" name="personImage"  accept="image/png, image/jpeg">
 
             </div>
         </div>
-        <div class="form-group row">
-            <label class="col-lg-3 col-form-label form-control-label">Job Title</label>
-            <div class="col-lg-9">
-                <input class="form-control" type="text"
-                       id="job"
-                       name="jobTitle" placeholder="Enter product name">
-<!--                       th:value="(${employee} != null ? ${employee.getJobTitle()} : '')"-->
 
-
-            </div>
-        </div>
         <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label">Address</label>
-            <div class="col-lg-9">
+            <div class="col-lg-4">
                 <input class="form-control" type="text"
                        id="street"
-                       name="street" src="placeholder="Enter product name">"
+                       name="street"  placeholder="street" required>
 <!--                       th:value="(${employee} != null ? ${employee.getStreet()} : '')"-->
 
 
             </div>
+            <br/>
+            <br/>
 
 
-            <label class="col-lg-3 col-form-label form-control-label"></label>
-            <div class="col-lg-6">
+            <div class="col-lg-4">
                 <input class="form-control" type="text"
                        id="city"
-                       name="city" placeholder="Enter product name">
+                       name="city" placeholder="Enter city" required>
 <!--                       th:value="(${employee} != null ? ${employee.getCity()} : '')"-->
 
 <!--                       placeholder="Enter product name">-->
             </div>
-            <div class="col-lg-3">
+
+            <label class="col-lg-3 col-form-label form-control-label"></label>
+            <div class="col-lg-8">
                 <input class="form-control" type="text"
                        id="country"
-                       name="country" placeholder="Enter product name">
+                       name="country" placeholder="Enter country" required>
 <!--                       th:value="(${employee} != null ? ${employee.getCountry()} : '')"-->
 
 <!--                       placeholder="Enter product name">-->
             </div>
         </div>
+        <br/>
+        <br/>
+
+        <h3 class="font-weight-bold ">Work information</h3>
+        <br/>
+
+        <div class="form-group row">
+            <label class="col-lg-3 col-form-label form-control-label">Job Title</label>
+            <div class="col-lg-8">
+                <input class="form-control" type="text"
+                       id="job"
+                       name="jobTitle" placeholder="Enter job title" required>
+                <!--                       th:value="(${employee} != null ? ${employee.getJobTitle()} : '')"-->
+
+
+            </div>
+        </div>
         <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label">Department</label>
-            <div class="col-lg-9">
+            <div class="col-lg-8">
                 <input class="form-control" type="text"
                        id="department"
-                       name="department" placeholder="Enter product name">
+                       name="department" placeholder="Enter department">
 <!--                       th:value="(${employee} != null ? ${employee.getDepartment()} : '')"-->
 
 <!--                       placeholder="Enter product name">-->
@@ -117,7 +140,7 @@
 
         <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label">Employment Date</label>
-            <div class="col-lg-9">
+            <div class="col-lg-8">
                 <input class="form-control" type="date"
 
                        id="date"
@@ -131,10 +154,10 @@
         </div>
         <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label">Salary</label>
-            <div class="col-lg-9">
-                <input class="form-control" type="text"
+            <div class="col-lg-8">
+                <input class="form-control" type="number"
                        id="salary"
-                       name="salary" placeholder="Enter product name">
+                       name="salary" placeholder="Enter salary" required>
 <!--                       th:value="(${employee} != null ? ${employee.getSalary()} : '')"-->
 
 <!--                       placeholder="Enter product name">-->
@@ -142,32 +165,22 @@
         </div>
         <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label">Experience</label>
-            <div class="col-lg-9">
-                <input class="form-control" type="text"
+            <div class="col-lg-8">
+                <input class="form-control" type="number"
                        id="experience"
-                       name="experience" placeholder="Enter product name">
+                       name="experience" placeholder="Years of experience">
 <!--                       th:value="(${employee} != null ? ${employee.getExperience()} : '')"-->
 
 <!--                       placeholder="Enter product name">-->
             </div>
         </div>
-        <div class="form-group row">
-            <label class="col-lg-3 col-form-label form-control-label">Embg</label>
-            <div class="col-lg-9">
-                <input class="form-control" type="text"
-                       id="embg"
-                       name="embg" placeholder="Enter product name">
-<!--                       th:value="(${employee} != null ? ${employee.getEmbg()} : '')"-->
 
-<!--                       placeholder="Enter product name">-->
-            </div>
-        </div>
         <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label">Projects</label>
-            <div class="col-lg-9">
-                <input class="form-control" type="text"
+            <div class="col-lg-8">
+                <input class="form-control" type="number"
                        id="projects"
-                       name="projects" placeholder="Enter product name">
+                       name="projects" placeholder="Enter number of projects">
 <!--                       th:value="(${employee} != null ? ${employee.getProjects()} : '')"-->
 
 <!--                       placeholder="Enter product name">-->
@@ -176,7 +189,7 @@
 
         <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label">Status</label>
-            <div class="col-lg-9">
+            <div class="col-lg-8">
                 <!--<select>
                     <option>
                         Active
@@ -192,43 +205,21 @@
                 </select>-->
                 <input class="form-control" type="text"
                        id="status"
-                       name="status" placeholder="Enter product name">
+                       name="status" placeholder="Enter employee status">
 <!--                       th:value="(${employee} != null ? ${employee.getStatus()} : '')"-->
 
 <!--                       placeholder="Enter product name">-->
             </div>
         </div>
-        <!--<div class="form-group row">
-            <label class="col-lg-3 col-form-label form-control-label">Hobbies</label>
-            <div class="col-lg-9">
-                <input class="form-control" type="url" value="">
-            </div>
-        </div>-->
 
+        <br>
 
-        <!--<div class="form-group row">
-                 <label class="col-lg-3 col-form-label form-control-label">Username</label>
-                 <div class="col-lg-9">
-                     <input class="form-control" type="text" value="jhonsanmark">
-                 </div>
-             </div>
-             <div class="form-group row">
-                 <label class="col-lg-3 col-form-label form-control-label">Password</label>
-                 <div class="col-lg-9">
-                     <input class="form-control" type="password" value="11111122333">
-                 </div>
-             </div>
-             <div class="form-group row">
-                 <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
-                 <div class="col-lg-9">
-                     <input class="form-control" type="password" value="11111122333">
-                 </div>
-             </div>-->
         <div class="form-group row">
             <label class="col-lg-3 col-form-label form-control-label"></label>
-            <div class="col-lg-9">
+            <div class="col-lg-8">
                 <button type="submit" class="btn btn-primary" >Save Employee</button>
-                <a type="reset" class="btn btn-secondary"  href="/employees/">Cancel</a>
+                <a type="reset" class="btn btn-secondary"  th:href="@{'/employees/{id}'(id=${company.getId()})}">Cancel</a>
+
 
             </div>
         </div>

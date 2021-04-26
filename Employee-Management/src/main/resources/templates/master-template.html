@@ -9,9 +9,11 @@
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
             crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
             integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
             crossorigin="anonymous"></script>
@@ -24,7 +26,7 @@
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/custom-css.css">
     <link rel="stylesheet" href="../css/font-awesome.min.css">
-    <!--<link rel="icon" type="image/png" href="../images/icons/favicon.ico"/>-->
+    <link rel="icon" type="image/png" href="../images/icons/favicon.ico"/>
     <link rel="stylesheet" type="text/css" href="../vendor/bootstrap/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="../fonts/font-awesome-4.7.0/css/font-awesome.css">
     <link rel="stylesheet" type="text/css" href="../fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
@@ -50,10 +52,13 @@
 <!--   <link rel="stylesheet" href="assets/css/animated-headline.css">-->
 <!--    <link rel="stylesheet" href="assets/css/magnific-popup.css">-->
     <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
+<!--    for back to top arrow-->
     <!--<link rel="stylesheet" href="assets/css/themify-icons.css">-->
 <!--    <link rel="stylesheet" href="assets/css/slick.css">-->
-    <link rel="stylesheet" href="assets/css/nice-select.css">
+<!--    <link rel="stylesheet" href="assets/css/nice-select.css">-->
      <link rel="stylesheet" href="assets/css/style.css">
+
+<!--    for company-list preview-->
 
 
     <!-- PROFILE CSS-->
@@ -87,10 +92,14 @@
 <body style="margin: 0; padding: 0;">
 
 <!-- PRE LOADER -->
-<section class="preloader">
+<!-- ? Preloader Start -->
+
+<section class="preloader" style="display: none">
     <div class="spinner">
 
-        <span class="spinner-rotate"></span>
+        <span class="spinner-rotate border"></span>
+
+        </div>
 
     </div>
 
@@ -100,24 +109,29 @@
 
 <header th:replace="/fragments/header"></header>
 
-<section th:replace="${bodyContent}"></section>
+<section th:replace="${bodyContent}">
+
+</section>
 
 <footer th:replace="/fragments/footer"></footer>
-
+<!-- Jquery Plugins, main Jquery -->
+<script src="../assets/js/plugins.js"></script>
 
 <!-- SCRIPTS -->
 <script src="../js/jquery.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+<!--<script src="../js/jquery.js"></script>-->
 <script src="../js/jquery.stellar.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
 <script src="../js/owl.carousel.min.js"></script>
 <script src="../js/smoothscroll.js"></script>
 <script src="../js/custom.js"></script>
 
 
-<script src="../js/jquery.js"></script>
-<!--    <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>-->
-<!--<script src="../js/bootstrap.min.js"></script>-->
-<!--<script src="../js/jquery.stellar.min.js"></script>-->
+
+    <script src="../vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/jquery.stellar.min.js"></script>
 <script src="../js/owl.carousel.min.js"></script>
 <script src="../js/smoothscroll.js"></script>
 <script src="../vendor/animsition/js/animsition.js"></script>
@@ -136,7 +150,7 @@
 
 
 
-
+<!--<script src="../js/customTabs.js"></script>-->
 <!-- JS here -->
 <!--<script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>-->
 <!-- Jquery, Popper, Bootstrap -->
@@ -155,7 +169,7 @@
 <!--<script src="./assets/js/jquery.magnific-popup.js"></script>-->
 
 <!-- Date Picker -->
-<!--<script src="./assets/js/gijgo.min.js"></script>-->
+<script src="./assets/js/gijgo.min.js"></script>
 <!-- Nice-select, sticky -->
 <!--<script src="./assets/js/jquery.nice-select.min.js"></script>-->
 <!--<script src="./assets/js/jquery.sticky.js"></script>-->
@@ -175,8 +189,7 @@
 <!--<script src="./assets/js/mail-script.js"></script>-->
 <!--<script src="./assets/js/jquery.ajaxchimp.min.js"></script>-->
 
-<!-- Jquery Plugins, main Jquery -->
-<!--<script src="./assets/js/plugins.js"></script>-->
+
 <script src="./assets/js/main.js"></script>
 
 
@@ -185,18 +198,16 @@
 <!-- PROFILE-->
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script type="text/javascript">
 
-</script>
 
 
 
 <!-- COMPANY EMLOYEES-->
 <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-<script type="text/javascript">
+<script type="text/javascript"></script>
 
-</script>
+
 
 
 <!-- COMPANY PROFILE-->

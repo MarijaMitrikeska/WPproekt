@@ -21,7 +21,7 @@
                 <th:block th:if="${Success}">
                     <div class="flex-sb-m w-full p-b-30">
                         <div>
-                            <label class="txt1 text-danger" th:text="${successMessage}" style="color: green ">
+                            <label class="txt1 text-success" th:text="${successMessage}" style="color: green!important; ">
                             </label>
                         </div>
                     </div>
@@ -48,22 +48,14 @@
                     <input class="input100" type="password" name="repeatedPassword" placeholder="Enter password">
                     <span class="focus-input100"></span>
                 </div>
-                <div class="wrap-input100 validate-input m-b-18" data-validate = "Account type is required">
-                    <span class="label-input100">Register as:</span>
-                    <label class="radio-inline " style="padding-right: 20px; margin-bottom: 20px">
-                        <input type="radio" name="role" value="ROLE_ADMIN" checked id="ROLE_ADMIN">&nbsp;Admin
-                    </label>
-                    <label class="radio-inline" style="margin-bottom: 20px">
-                        <input type="radio" name="role" value="ROLE_USER" id="ROLE_USER">&nbsp;&nbsp;Company
-                    </label>
-                    <span class="focus-input100"></span>
-                </div>
+                <input type="hidden" name="role" value="ROLE_USER" id="ROLE_USER">
+
 
                 <div class="container-login100-form-btn">
                     <button class="login100-form-btn">
                         Register
                     </button>
-<!--                style="color: #4674b8; padding-top: 10px;-->
+
                 </div>
             </form>
                 <div class="container-login100-form-btn" >

@@ -17,6 +17,8 @@ import java.util.List;
 @Entity
 @Table(name = "company_users")
 public class User implements UserDetails {
+
+    //UserDetails explanation
     @Id
     private String username;
 
@@ -32,8 +34,7 @@ public class User implements UserDetails {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-//    @OneToOne(mappedBy = "user")
-//    private Company company;
+
 
 
 

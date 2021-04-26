@@ -9,11 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CompanyService {
-//    Company addCompany(String name, String description,String moto, String owner, Integer employee, Integer interns);
-    Company update(String user,String name, String description, String moto, String owner, MultipartFile profilePicture, String imageSource, Integer employee, Integer interns);
-    void delete(String name);
+
+
+
     void deleteById(Long id);
-    List<Company>listEmployees();
+
     List<Company>searchEmployees(String search);
     List<Company>listCompanies();
 
@@ -22,9 +22,9 @@ public interface CompanyService {
     Optional<Company>save(String user, String name, String desc, String owner, String moto, MultipartFile profilePicture, String imageSource, Integer numEm, Integer numInt);
     Optional<Company>findById(Long id);
 
-    Company addEmployeeToCompany(Company company, Employee employee);
+
     Optional<Company> getCompany(String username);
-    List<Employee>listEmployeesInCompany(Long companyId);
+    List<Employee> listEmployeesInCompany(Long companyId);
 
 
 }

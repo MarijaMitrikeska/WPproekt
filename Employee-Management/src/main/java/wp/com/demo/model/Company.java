@@ -17,19 +17,14 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-
-
     private String name;
     private String description;
     private String moto;
-
     private String owner;
     private Integer employee_num;
     private Integer intern_num;
 
-//    @OneToOne
-//    private User user;
+
     private  String companyUsername;
 
 //    @Column(nullable = true, length = 64)
@@ -38,7 +33,10 @@ public class Company {
     @OneToMany(mappedBy = "companyId")
     private List<Employee> employees;
 
-//TODO: metod koj ke proveruva dali kopceto edit i add employee za soodvetnata kompanija(spored id) na drugite
+    @OneToMany(mappedBy = "companyId")
+    private List<Intern> interns;
+
+
 
 
     public Company() {

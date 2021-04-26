@@ -17,8 +17,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
 
-    //TODO: isklucok i metod za veke zacuvan vraboten
-    //TODO: metod so koj koga ke se zacuva vraboten istiot da se zacuva i vo listata na vraboteni vo kompanijata
+
     private String company;
     private String name;
     private String surname;
@@ -30,7 +29,7 @@ public class Employee {
     private String jobTitle;
     private String department;
 
-
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate employmentDate;
     private String status;
     private String phone;
@@ -58,10 +57,7 @@ public class Employee {
         this.jobTitle = jobTitle;
         this.department = department;
         this.companyId=companyId;
-
-
         this.employmentDate = employmentDate;
-
         this.status = status;
         this.phone = phone;
         this.projects = projects;

@@ -26,54 +26,28 @@ public class CompanyProfileController {
     public static final String targetFolderImagePPPath = "C:\\Users\\PC\\Desktop\\Employee-managament-app\\WPproekt\\Employee-Management\\target\\classes\\static\\ProfilePictures";
 
     private final CompanyService companyService;
-    private final CompanyRepository companyRepository;
-    private final UserService userService;
 
-    public CompanyProfileController(CompanyService companyService, CompanyRepository companyRepository, UserService userService) {
+
+    public CompanyProfileController(CompanyService companyService) {
         this.companyService = companyService;
-        this.companyRepository = companyRepository;
-        this.userService = userService;
+
     }
 
-    //TODO: redirect errori da sredam
+
 
     @GetMapping("/{id}")
-    public String getCompanyPage(@PathVariable Long id, HttpServletRequest request, Model model, Authentication authentication) {
+    public String getCompanyPage(@PathVariable Long id, HttpServletRequest request, Model model) {
         if (this.companyService.findById(id).isPresent()) {
             Company company = this.companyService.findById(id).get();
 
-//
-            if (request.getRemoteUser() != null) {
+            model.addAttribute("username", request.getRemoteUser());
 
+            model.addAttribute("company", company);
 
-                String username=request.getRemoteUser();
-//
-                model.addAttribute("username", request.getRemoteUser());
-//                model.addAttribute("companyUser",this.companyService.getCompany(user).toString() );
-                model.addAttribute("company", company);
                 model.addAttribute("bodyContent", "companyProfile");
                 return "master-template";
-            }
-
-
-            else {
-//                Company company = this.companyService.findById(id).get();
-                model.addAttribute("company", company);
-                model.addAttribute("bodyContent", "companyProfile");
-
-
-            }
         }
-
-        return "master-template";
-
-
-
-
-
-
-
-
+        return "redirect/:company?error=CompanyNotFound";
     }
 
 
@@ -85,16 +59,15 @@ public class CompanyProfileController {
                 Company company = this.companyService.findById(id).get();
                 model.addAttribute("company", company);
                 model.addAttribute("bodyContent", "edit-company");
-
                 return "master-template";
             }
             return "redirect/:company?error=CompanyNotFound";
         }
 
-        @PostMapping("/add")
-        public String saveCompany (
+        @PostMapping("/add/{id}")
+        public String saveEditedCompany (
                 HttpServletRequest request,
-                @RequestParam(required = false) Long id,
+                @PathVariable Long id,
                 @RequestParam String name,
                 @RequestParam String description,
                 @RequestParam String moto,
@@ -102,30 +75,26 @@ public class CompanyProfileController {
                 @RequestParam Integer numEmployee,
                 @RequestParam Integer numInterns,
                 @RequestParam("image") MultipartFile profilePicture) throws IOException {
-//
+
             String user=request.getRemoteUser();
-
-
 
             if (!profilePicture.isEmpty()) {
                 File picture_target = new File(profilePicture.getOriginalFilename());
-//                    (targetFolderImagePPPath + request.getRemoteUser() + "." + profilePicture.getOriginalFilename().split("\\.")[1]);
-//                if (picture_target.exists()) {
-////                    picture_target.delete();
-//
-//                }
-                if (id != null) {
+//                   (targetFolderImagePPPath + request.getRemoteUser() + "." + profilePicture.getOriginalFilename().split("\\.")[1]);
+                if (picture_target.exists()) {
+                    picture_target.delete();
+
+                }
+
                     profilePicture.transferTo(picture_target);
                     this.companyService.edit(user,id, name, description, moto, owner, profilePicture, "../ProfilePictures/" + picture_target.getName(), numEmployee, numInterns);
 
-//
-                }
-            } else {
+              return "redirect:/company-profile/{id}";
 
-
-                this.companyService.save(user,name, description, moto, owner, profilePicture, "../ProfilePictures/", numEmployee, numInterns);
             }
-            return "redirect:/manage-companies";
+            this.companyService.edit(user,id, name, description, moto, owner, profilePicture, "../ProfilePictures/" , numEmployee, numInterns);
+
+            return "redirect:/company-profile/{id}";
 
 
         }

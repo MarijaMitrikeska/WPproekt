@@ -27,16 +27,14 @@ public class CompanyListController {
     public static final String targetFolderImagePPPath = "C:\\Users\\PC\\Desktop\\Employee-managament-app\\WPproekt\\Employee-Management\\target\\classes\\static\\ProfilePictures";
 
 
-    private final CompanyRepository companyRepository;
-    private final CompanyService companyService;
-    private final UserService userService;
-    private final EmployeeService employeeService;
 
-    public CompanyListController(CompanyRepository companyRepository, CompanyService companyService, UserService userService, EmployeeService employeeService) {
-        this.companyRepository = companyRepository;
+    private final CompanyService companyService;
+
+    public CompanyListController(CompanyService companyService) {
+
         this.companyService = companyService;
-        this.userService = userService;
-        this.employeeService = employeeService;
+
+
     }
 
 
@@ -49,46 +47,40 @@ public class CompanyListController {
 
     }
 
-    // TODO : Should delete the company and its employees with their data
+
     @DeleteMapping("/delete/{id}")
     public String deleteCompany(@PathVariable Long id) {
         Company company=this.companyService.findById(id).get();
-    List<Employee> employees=this.employeeService.listByCompanyId(company);
-        this.companyService.deleteById(id);
-//        this.employeeService.deleteEmployeesByCompany(employees);
-//        this.employeeService.listByCompanyId(company).removeAll(Collections.emptyList());
 
-        this.companyService.listEmployeesInCompany(id).removeAll(Collections.emptyList());
+        this.companyService.deleteById(id);
+
         return "redirect:/manage-companies";
     }
 
 
     @GetMapping("/add-company")
     public String addCompanyPage(Model model) {
+
         model.addAttribute("bodyContent", "add-company");
         return "master-template";
     }
 
     @PostMapping("/add")
     public String saveCompany(
-            //@RequestParam(required = false)Long id,
             HttpServletRequest request,
-            Authentication authentication,
             @RequestParam String name,
             @RequestParam String description,
             @RequestParam String moto,
             @RequestParam String owner,
             @RequestParam Integer numEmployee,
             @RequestParam Integer numInterns,
-            @RequestParam("image") MultipartFile profilePicture
-    ) throws IOException {
+            @RequestParam("image") MultipartFile profilePicture) throws IOException {
         String username=request.getRemoteUser();
-
 
 
         if (!profilePicture.isEmpty()) {
             File picture_target = new File(profilePicture.getOriginalFilename());
-//                    (targetFolderImagePPPath + request.getRemoteUser() + "." + profilePicture.getOriginalFilename().split("\\.")[1]);
+
             if (picture_target.exists()) {
                 picture_target.delete();
 
@@ -98,9 +90,6 @@ public class CompanyListController {
 
         }
 
-       /*if (id!=null){
-            this.companyService.edit(id,name,description, moto,owner,numEmployee,numInterns);
-        }*/
         else {
             this.companyService.save(username,name, description, moto, owner, profilePicture, "../ProfilePictures/", numEmployee, numInterns);
 

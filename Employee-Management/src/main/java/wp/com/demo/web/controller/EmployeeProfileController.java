@@ -27,15 +27,14 @@ public class EmployeeProfileController {
     public static final String targetFolderImagePPPath = "C:\\Users\\PC\\Desktop\\Employee-managament-app\\WPproekt\\Employee-Management\\target\\classes\\static\\ProfilePictures";
 
     private final EmployeeService employeeService;
-    private final EmployeeRepository employeeRepository;
-    private final CompanyService companyService;
-    private final UserService userService;
 
-    public EmployeeProfileController(EmployeeService employeeService, EmployeeRepository employeeRepository, CompanyService companyService, UserService userService) {
+    private final CompanyService companyService;
+
+
+    public EmployeeProfileController(EmployeeService employeeService,CompanyService companyService) {
         this.employeeService = employeeService;
-        this.employeeRepository = employeeRepository;
         this.companyService = companyService;
-        this.userService = userService;
+
     }
 
 
@@ -46,11 +45,12 @@ public class EmployeeProfileController {
             model.addAttribute("employee", employee);
 
             model.addAttribute("bodyContent", "employee-profile");
-            return "master-template";
+
 
         }
+        return "master-template";
 
-        return "redirect:/home";
+
 
     }
 
@@ -74,10 +74,6 @@ public class EmployeeProfileController {
     @PostMapping("/add/{id}")
     public String saveEmployee(
             @PathVariable Long id,
-            Model model,
-            HttpServletRequest request,
-
-//            @RequestParam Long id,
             @RequestParam String name,
             @RequestParam String surname,
             @RequestParam String embg,
@@ -87,7 +83,7 @@ public class EmployeeProfileController {
             @RequestParam String country,
             @RequestParam String jobTitle,
             @RequestParam String department,
-//            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)Date employmentDate ,
+
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate employmentDate,
             @RequestParam String status,
             @RequestParam String phone,
