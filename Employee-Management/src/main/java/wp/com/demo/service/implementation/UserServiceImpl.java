@@ -45,6 +45,7 @@ public class UserServiceImpl implements UserService {
         User user=new User(username,email,passwordEncoder.encode(password),role);
 
             Company company = new Company(username, username, null, null, null, null, null, null);
+        this.companyRepository.save(company);
 
             return userRepository.save(user);
         }
